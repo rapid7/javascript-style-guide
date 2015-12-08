@@ -1,4 +1,4 @@
-# Airbnb React/JSX Style Guide
+# Rapid7 React/JSX Style Guide
 
 *A mostly reasonable approach to React and JSX*
 
@@ -33,7 +33,7 @@
       return <div />;
     }
   });
-  
+
   // good
   class Listing extends React.Component {
     render() {
@@ -243,7 +243,7 @@
 ## Ordering
 
   - Ordering for class extends React.Component:
-  
+
   1. constructor
   1. optional static methods
   1. getChildContext
@@ -259,34 +259,34 @@
   1. *Optional render methods* like renderNavigation() or renderProfilePicture()
   1. render
 
-  - How to define propTypes, defaultProps, contextTypes, etc...  
+  - How to define propTypes, defaultProps, contextTypes, etc...
 
   ```javascript
   import React, { Component, PropTypes } from 'react';
-  
+
   const propTypes = {
     id: PropTypes.number.isRequired,
     url: PropTypes.string.isRequired,
     text: PropTypes.string,
   };
-  
+
   const defaultProps = {
     text: 'Hello World',
   };
-  
+
   class Link extends Component {
     static methodsAreOk() {
       return true;
     }
-  
+
     render() {
       return <a href={this.props.url} data-id={this.props.id}>{this.props.text}</a>
     }
   }
-  
+
   Link.propTypes = propTypes;
   Link.defaultProps = defaultProps;
-  
+
   export default Link;
   ```
 

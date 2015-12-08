@@ -1,15 +1,15 @@
-# Airbnb JavaScript Style Guide() {
+# Rapid7 JavaScript Style Guide() {
 
 *A mostly reasonable approach to JavaScript*
 
-[![Downloads](https://img.shields.io/npm/dm/eslint-config-airbnb.svg)](https://www.npmjs.com/package/eslint-config-airbnb)
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/airbnb/javascript?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Downloads](https://img.shields.io/npm/dm/eslint-config-rapid7.svg)](https://www.npmjs.com/package/eslint-config-rapid7)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/rapid7/javascript-style-guide?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 Other Style Guides
  - [ES5](es5/)
  - [React](react/)
- - [CSS & Sass](https://github.com/airbnb/css)
- - [Ruby](https://github.com/airbnb/ruby)
+ - [CSS & Sass](https://github.com/rapid7/css)
+ - [Ruby](https://github.com/rapid7/ruby)
 
 ## Table of Contents
 
@@ -135,6 +135,66 @@ Other Style Guides
     console.log(b); // ReferenceError
     ```
 
+
+  - [2.4](#2.4) <a name='2.4'></a> Use only one `let` statement per block placed at the top of the block.
+  > NOTE: Because `const` can only be set once, you can have multiple const statements in a block
+
+    ```javascript
+    // bad
+    {
+      let a = 'hi';
+      let c;
+      const b = 43;
+      if (b > 1) {
+        a = 'no
+      }
+      c = a + b;
+    }
+
+    // bad
+    {
+      let a = 'hi';
+      const b = 43;
+      if (b > 1) {
+        a = 'no';
+      }
+      let c = a + b;
+    }
+
+    // good
+    {
+      let a = 'hi',
+          c;
+      const b = 43;
+
+      if (b > 1) {
+        a = 'no';
+      }
+
+      c = a + b;
+    }
+    ```
+
+
+  - [2.5](#2.5) <a name='2.5'></a> When chaining a let statement, each assignment should be on its own line and assignments should be before any unassigned variables.  Unassigned variables can be on the same line.
+  > Why? Readability.  This ensures that assignments aren't confused for comma expressions
+
+    ```javascript
+    // bad
+    let b, c, d,// Unassigned variable before assigned variable
+        a = 'hi';
+
+    // bad
+    let a = 'hi', b = 'test', c, d, e; // Multiple assignments on the same line
+
+    // good
+    let a = 'hi',
+        b = 'test',
+        c, d, e;
+    ```
+
+
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Objects
@@ -151,7 +211,7 @@ Other Style Guides
     const item = {};
     ```
 
-  - [3.2](#3.2) <a name='3.2'></a> If your code will be executed in browsers in script context, don't use [reserved words](http://es5.github.io/#x7.6.1) as keys. It won't work in IE8. [More info](https://github.com/airbnb/javascript/issues/61). It’s OK to use them in ES6 modules and server-side code.
+  - [3.2](#3.2) <a name='3.2'></a> If your code will be executed in browsers in script context, don't use [reserved words](http://es5.github.io/#x7.6.1) as keys. It won't work in IE8. [More info](https://github.com/rapid7/javascript-style-guide/issues/61). It’s OK to use them in ES6 modules and server-side code.
 
     ```javascript
     // bad
@@ -422,7 +482,7 @@ Other Style Guides
     ```
 
   - [6.2](#6.2) <a name='6.2'></a> Strings longer than 100 characters should be written across multiple lines using string concatenation.
-  - [6.3](#6.3) <a name='6.3'></a> Note: If overused, long strings with concatenation could impact performance. [jsPerf](http://jsperf.com/ya-string-concat) & [Discussion](https://github.com/airbnb/javascript/issues/40).
+  - [6.3](#6.3) <a name='6.3'></a> Note: If overused, long strings with concatenation could impact performance. [jsPerf](http://jsperf.com/ya-string-concat) & [Discussion](https://github.com/rapid7/javascript-style-guide/issues/40).
 
     ```javascript
     // bad
@@ -490,7 +550,7 @@ Other Style Guides
     // immediately-invoked function expression (IIFE)
     (() => {
       console.log('Welcome to the Internet. Please follow me.');
-    })();
+    }());
     ```
 
   - [7.3](#7.3) <a name='7.3'></a> Never declare a function in a non-function block (if, while, etc). Assign the function to a variable instead. Browsers will allow you to do it, but they all interpret it differently, which is bad news bears.
@@ -577,7 +637,7 @@ Other Style Guides
   > Why? They are confusing to reason about.
 
   ```javascript
-  var b = 1;
+  let b = 1;
   // bad
   function count(a = b++) {
     console.log(a);
@@ -612,6 +672,11 @@ Other Style Guides
 
   // still bad
   var subtract = Function('a', 'b', 'return a - b');
+
+  // good
+  let subtract = (a, b) => {
+    return a - b;
+  }
   ```
 
 - [7.11](#7.11) <a name="7.11"></a> Spacing in a function signature.
@@ -627,6 +692,46 @@ Other Style Guides
   // good
   const x = function () {};
   const y = function a() {};
+  ```
+
+- [7.12](#7.12) <a name="7.12"></a> Avoid long functions.  If your function is over 25 lines, it should most likely be refactored.
+
+  > Why? Long functions are difficult to test, more likely to break, are not single purpose
+
+   eslint rules: [`max-statements`](http://eslint.org/docs/rules/max-statements.html).
+
+- [7.13](#7.13) <a name="7.13"></a> Avoid deeply nested code
+
+  > Why? Deeply nested code makes testing difficult and is usually a sign that that your function is doing too much
+
+   eslint rules: [`max-depth`](http://eslint.org/docs/rules/max-depth.html).
+
+- [7.14](#7.14) <a name='7.14'></a> Instance or static methods are preferred to anonymous functions
+
+  > Why? Anonymous functions are difficult to test, and they make code difficult to read.  Future-proofs code in some cases be separating functionality.  Helps limit code depth
+
+  > Why not? Very short callbacks that are unlikely to need to be tested, reused, or changed
+
+  eslint rules: [`max-nested-callbacks`](http://eslint.org/docs/rules/max-nested-callbacks.html)
+
+  ```javascript
+  class Team {
+    // bad
+    transformDevelopers(developers) {
+      return developers.map((developer) => {
+        developer.fullName = developer.firstName + developer.lastName;
+        return developer;
+      });
+    }
+    // good
+    transformDevelopers(developers) {
+      return developers.map(this.transformDeveloper);
+    }
+    transformDeveloper(developer) {
+      developer.fullName = developer.firstName + developer.lastName;
+      return developer;
+    }
+  }
   ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -655,34 +760,12 @@ Other Style Guides
     });
     ```
 
-  - [8.2](#8.2) <a name='8.2'></a> If the function body consists of a single expression, feel free to omit the braces and use the implicit return. Otherwise use a `return` statement.
-
-  > Why? Syntactic sugar. It reads well when multiple functions are chained together.
-
-  > Why not? If you plan on returning an object.
-
-  eslint rules: [`arrow-parens`](http://eslint.org/docs/rules/arrow-parens.html), [`arrow-body-style`](http://eslint.org/docs/rules/arrow-body-style.html).
-
-    ```javascript
-    // good
-    [1, 2, 3].map(number => `A string containing the ${number}.`);
-
-    // bad
-    [1, 2, 3].map(number => {
-      const nextNumber = number + 1;
-      `A string containing the ${nextNumber}.`;
-    });
-
-    // good
-    [1, 2, 3].map(number => {
-      const nextNumber = number + 1;
-      return `A string containing the ${nextNumber}.`;
-    });
-    ```
-
-  - [8.3](#8.3) <a name='8.3'></a> In case the expression spans over multiple lines, wrap it in parentheses for better readability.
+  - [8.2](#8.2) <a name='8.2'></a> Always wrap expression arguments in parenthesis for better readability.
 
   > Why? It shows clearly where the function starts and ends.
+
+    eslint rules: [`arrow-parens`](http://eslint.org/docs/rules/arrow-parens.html)
+
 
     ```js
     // bad
@@ -692,25 +775,27 @@ Other Style Guides
     );
 
     // good
-    [1, 2, 3].map(number => (
-      `As time went by, the string containing the ${number} became much ` +
-      'longer. So we needed to break it over multiple lines.'
-    ));
+    [1, 2, 3].map((number) => {
+      return `As time went by, the string containing the ${number} became much ` +
+          'longer. So we needed to break it over multiple lines.'
+    });
     ```
 
 
-  - [8.4](#8.4) <a name='8.4'></a> If your function only takes a single argument, feel free to omit the parentheses.
+  - [8.3](#8.3) <a name='8.3'></a> Always wrap expression body in curly brackets.
 
-  > Why? Less visual clutter.
+  > Why? Prevents inconsistencies when implicit returns are an object.
 
-  eslint rules: [`arrow-parens`](http://eslint.org/docs/rules/arrow-parens.html).
+  eslint rules: [`arrow-body-style`](http://eslint.org/docs/rules/arrow-body-style.html).
 
     ```js
-    // good
-    [1, 2, 3].map(x => x * x);
+    // bad
+    [1, 2, 3].map((x) => x * x);
 
     // good
-    [1, 2, 3].reduce((y, x) => x + y);
+    [1, 2, 3].reduce((y, x) => {
+      return x + y;
+    });
     ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -836,15 +921,15 @@ Other Style Guides
 
     ```javascript
     // bad
-    const AirbnbStyleGuide = require('./AirbnbStyleGuide');
-    module.exports = AirbnbStyleGuide.es6;
+    const Rapid7StyleGuide = require('./Rapid7StyleGuide');
+    module.exports = Rapid7StyleGuide.es6;
 
     // ok
-    import AirbnbStyleGuide from './AirbnbStyleGuide';
-    export default AirbnbStyleGuide.es6;
+    import Rapid7StyleGuide from './Rapid7StyleGuide';
+    export default Rapid7StyleGuide.es6;
 
     // best
-    import { es6 } from './AirbnbStyleGuide';
+    import { es6 } from './Rapid7StyleGuide';
     export default es6;
     ```
 
@@ -854,10 +939,10 @@ Other Style Guides
 
     ```javascript
     // bad
-    import * as AirbnbStyleGuide from './AirbnbStyleGuide';
+    import * as Rapid7StyleGuide from './Rapid7StyleGuide';
 
     // good
-    import AirbnbStyleGuide from './AirbnbStyleGuide';
+    import Rapid7StyleGuide from './Rapid7StyleGuide';
     ```
 
   - [10.3](#10.3) <a name='10.3'></a>And do not export directly from an import.
@@ -867,13 +952,17 @@ Other Style Guides
     ```javascript
     // bad
     // filename es6.js
-    export { es6 as default } from './airbnbStyleGuide';
+    export { es6 as default } from './rapid7StyleGuide';
 
     // good
     // filename es6.js
-    import { es6 } from './AirbnbStyleGuide';
+    import { es6 } from './Rapid7StyleGuide';
     export default es6;
     ```
+
+  - [10.4](#10.4) <a name='10.4'></a>Place all imports at the top of the file and all exports at the end of the file
+
+  > Why? Makes it easy to keep track of all imports and exports.
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -945,8 +1034,48 @@ Other Style Guides
     }
 
     const isJedi = getProp('jedi');
+
     ```
 
+  - [12.3](#12.3) <a name='12.3'></a> Avoid the use of 'Magic Numbers' and 'Magic Strings' especially when they are likely to be changed or reused.  Use static variables in SCREAMING_SNAKE_CASE instead
+    Follow the naming convention of TYPE_DESCRIPTION
+
+    > Why? Makes it easy to change values when necessary, makes values available in testing and other classes, and adds clarity to what the values represent
+
+    eslint rules: [`magic`](http://eslint.org/docs/rules/dot-notation.html).
+
+    ```javascript
+    // bad
+    class Person {
+      age = 12;
+      validAge() {
+        return this.age > 18 && this.age < 35;
+      }
+      onClickSubmit() {
+        if (!this.validAge()) {
+          console.error('Your age is not valid');
+        }
+      }
+    }
+
+    // good
+    class Person {
+      static AGE_MINIMUM = 18;
+      static AGE_MAXIMUM = 35;
+      static ERROR_AGE_INVALID = 'Your age is not valid';
+
+      age = 12;
+
+      validAge() {
+        return this.age > Person.AGE_MINIMUM && this.age < Person.AGE_MAXIMUM;
+      }
+      onClickSubmit() {
+        if (!this.validAge()) {
+          console.error(Person.ERROR_AGE_INVALID);
+        }
+      }
+    }
+    ```
 **[⬆ back to top](#table-of-contents)**
 
 
@@ -964,7 +1093,7 @@ Other Style Guides
 
   - [13.2](#13.2) <a name='13.2'></a> Use one `const` declaration per variable.
 
-    > Why? It's easier to add new variable declarations this way, and you never have to worry about swapping out a `;` for a `,` or introducing punctuation-only diffs.
+    > Why? It's easier to add new variable declarations this way.
 
   eslint rules: [`one-var`](http://eslint.org/docs/rules/one-var.html).
 
@@ -1006,20 +1135,24 @@ Other Style Guides
     // good
     const goSportsTeam = true;
     const items = getItems();
-    let dragonball;
-    let i;
-    let length;
+    let dragonball, i, length;
+
+    // also good
+    const goSportsTeam = true,
+        items = getItems();
+    let dragonball, i, length;
     ```
 
-  - [13.4](#13.4) <a name='13.4'></a> Assign variables where you need them, but place them in a reasonable place.
+  - [13.4](#13.4) <a name='13.4'></a> Assign constants where you need them, but place them in a reasonable place.  Let statements should be at the top of blocks
 
-  > Why? `let` and `const` are block scoped and not function scoped.
+  > Why? `let` and `const` are block scoped and not function scoped.  Helps prevent temporal dead zone issues
 
     ```javascript
     // good
     function () {
+      let message = 'doing stuff with ';
+
       test();
-      console.log('doing stuff..');
 
       //..other stuff..
 
@@ -1028,6 +1161,8 @@ Other Style Guides
       if (name === 'test') {
         return false;
       }
+
+      message = message + name;
 
       return name;
     }
@@ -1200,6 +1335,11 @@ Other Style Guides
     if (collection.length) {
       // ...stuff...
     }
+
+    // bad - potentially confusing since 0 is often a valid id.
+    if (id) {
+      // ...stuff...
+    }
     ```
 
   - [15.4](#15.4) <a name='15.4'></a> For more information see [Truth Equality and JavaScript](http://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/#more-2108) by Angus Croll.
@@ -1263,7 +1403,7 @@ Other Style Guides
 
 ## Comments
 
-  - [17.1](#17.1) <a name='17.1'></a> Use `/** ... */` for multi-line comments. Include a description, specify types and values for all parameters and return values.
+  - [17.1](#17.1) <a name='17.1'></a> Use `/** ... */` for multi-line comments. Include a description, specify types and values for all parameters and return values.  Follow [jsdoc syntax](http://usejsdoc.org/)
 
     ```javascript
     // bad
@@ -1333,30 +1473,39 @@ Other Style Guides
     }
     ```
 
-  - [17.3](#17.3) <a name='17.3'></a> Prefixing your comments with `FIXME` or `TODO` helps other developers quickly understand if you're pointing out a problem that needs to be revisited, or if you're suggesting a solution to the problem that needs to be implemented. These are different than regular comments because they are actionable. The actions are `FIXME -- need to figure this out` or `TODO -- need to implement`.
+  - [17.3](#17.3) <a name='17.3'></a> Prefixing your comments with `@todo` helps other developers quickly understand if you're pointing out a problem that needs to be revisited, or if you're suggesting a solution to the problem that needs to be implemented. These are different than regular comments because they are actionable
 
-  - [17.4](#17.4) <a name='17.4'></a> Use `// FIXME:` to annotate problems.
+  - [17.4](#17.4) <a name='17.4'></a> Use `// @todo -:` to annotate problems.
 
     ```javascript
     class Calculator extends Abacus {
       constructor() {
         super();
 
-        // FIXME: shouldn't use a global here
+        // @todo shouldn't use a global here
         total = 0;
+
       }
     }
     ```
 
-  - [17.5](#17.5) <a name='17.5'></a> Use `// TODO:` to annotate solutions to problems.
+
+  - [17.5](#17.5) <a name='17.5'></a> Use jsdoc comments with type and an optional description where necessary for all properties and return values on all public and static methods and optionally on properties.
 
     ```javascript
-    class Calculator extends Abacus {
-      constructor() {
-        super();
+    class Calculator {
+      /**
+       * @type {Number}
+       */
+      total = 0;
 
-        // TODO: total should be configurable by an options param
-        this.total = 0;
+      /**
+       * @param {Number} firstNumber
+       * @param {Number} secondNumber
+       * @returns {Number} The result of adding firstNumber and secondNumber
+       */
+      add(firstNumber, secondNumber) {
+        return firstNumber + secondNumber;
       }
     }
     ```
@@ -1478,7 +1627,7 @@ Other Style Guides
     ```
 
   - [18.6](#18.6) <a name='18.6'></a> Use indentation when making long method chains. Use a leading dot, which
-    emphasizes that the line is a method call, not a new statement.
+    emphasizes that the line is a method call, not a new statement.  Chaining should use a 4 character continuation indent
 
     ```javascript
     // bad
@@ -1494,10 +1643,10 @@ Other Style Guides
 
     // good
     $('#items')
-      .find('.selected')
+        .find('.selected')
         .highlight()
         .end()
-      .find('.open')
+        .find('.open')
         .updateCount();
 
     // bad
@@ -1509,10 +1658,11 @@ Other Style Guides
     // good
     const leds = stage.selectAll('.led')
         .data(data)
-      .enter().append('svg:svg')
+        .enter()
+        .append('svg:svg')
         .classed('led', true)
         .attr('width', (radius + margin) * 2)
-      .append('svg:g')
+        .append('svg:g')
         .attr('transform', 'translate(' + (radius + margin) + ',' + (radius + margin) + ')')
         .call(tron.led);
     ```
@@ -1660,6 +1810,13 @@ Other Style Guides
     const foo = { clark: 'kent' };
     ```
 
+
+  - [18.12](#18.12) <a name='18.12'></a> Maximum line length is 120 characters
+
+  > Why? Long lines are difficult to read themselves and in diffs, and they make viewing code side-by-side difficult
+
+  eslint rules: [`max-len`](http://eslint.org/docs/rules/max-len.html).
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Commas
@@ -1680,7 +1837,7 @@ Other Style Guides
     const story = [
       once,
       upon,
-      aTime,
+      aTime
     ];
 
     // bad
@@ -1696,44 +1853,18 @@ Other Style Guides
       firstName: 'Ada',
       lastName: 'Lovelace',
       birthYear: 1815,
-      superPower: 'computers',
+      superPower: 'computers'
     };
     ```
 
-  - [19.2](#19.2) <a name='19.2'></a> Additional trailing comma: **Yup.**
+  - [19.2](#19.2) <a name='19.2'></a> Additional trailing comma: **Nope.**
 
   eslint rules: [`no-comma-dangle`](http://eslint.org/docs/rules/no-comma-dangle.html).
 
   > Why? This leads to cleaner git diffs. Also, transpilers like Babel will remove the additional trailing comma in the transpiled code which means you don't have to worry about the [trailing comma problem](es5/README.md#commas) in legacy browsers.
 
     ```javascript
-    // bad - git diff without trailing comma
-    const hero = {
-         firstName: 'Florence',
-    -    lastName: 'Nightingale'
-    +    lastName: 'Nightingale',
-    +    inventorOf: ['coxcomb graph', 'modern nursing']
-    };
-
-    // good - git diff with trailing comma
-    const hero = {
-         firstName: 'Florence',
-         lastName: 'Nightingale',
-    +    inventorOf: ['coxcomb chart', 'modern nursing'],
-    };
-
     // bad
-    const hero = {
-      firstName: 'Dana',
-      lastName: 'Scully'
-    };
-
-    const heroes = [
-      'Batman',
-      'Superman'
-    ];
-
-    // good
     const hero = {
       firstName: 'Dana',
       lastName: 'Scully',
@@ -1742,6 +1873,17 @@ Other Style Guides
     const heroes = [
       'Batman',
       'Superman',
+    ];
+
+    // good
+    const hero = {
+      firstName: 'Dana',
+      lastName: 'Scully'
+    };
+
+    const heroes = [
+      'Batman',
+      'Superman'
     ];
     ```
 
@@ -1830,7 +1972,7 @@ Other Style Guides
     const val = inputValue >> 0;
     ```
 
-  - [21.5](#21.5) <a name='21.5'></a> **Note:** Be careful when using bitshift operations. Numbers are represented as [64-bit values](http://es5.github.io/#x4.3.19), but Bitshift operations always return a 32-bit integer ([source](http://es5.github.io/#x11.7)). Bitshift can lead to unexpected behavior for integer values larger than 32 bits. [Discussion](https://github.com/airbnb/javascript/issues/109). Largest signed 32-bit Int is 2,147,483,647:
+  - [21.5](#21.5) <a name='21.5'></a> **Note:** Be careful when using bitshift operations. Numbers are represented as [64-bit values](http://es5.github.io/#x4.3.19), but Bitshift operations always return a 32-bit integer ([source](http://es5.github.io/#x11.7)). Bitshift can lead to unexpected behavior for integer values larger than 32 bits. [Discussion](https://github.com/rapid7/javascript-style-guide/issues/109). Largest signed 32-bit Int is 2,147,483,647:
 
     ```javascript
     2147483647 >> 0 //=> 2147483647
@@ -1858,7 +2000,8 @@ Other Style Guides
 
 ## Naming Conventions
 
-  - [22.1](#22.1) <a name='22.1'></a> Avoid single letter names. Be descriptive with your naming.
+  - [22.1](#22.1) <a name='22.1'></a> Avoid single letter names and abbreviations. Be descriptive with your naming.
+  > Why? Modern autocomplete and minification makes clarity more valuable than keystrokes
 
     ```javascript
     // bad
@@ -1983,13 +2126,27 @@ Other Style Guides
   - [22.8](#22.8) <a name='22.8'></a> Use PascalCase when you export a singleton / function library / bare object.
 
     ```javascript
-    const AirbnbStyleGuide = {
+    const Rapid7StyleGuide = {
       es6: {
       }
     };
 
-    export default AirbnbStyleGuide;
+    export default Rapid7StyleGuide;
     ```
+
+
+  - [22.9](#22.9) <a name='22.9'></a> Method names should be verbs
+
+    ```javascript
+    // good
+    function getTimeInUtc(date) {}
+
+    // bad
+    function utcTime(date) {}
+    function timeInUtc(date) {}
+    ```
+
+
 
 
 **[⬆ back to top](#table-of-contents)**
@@ -2186,7 +2343,7 @@ Other Style Guides
    - Whichever testing framework you use, you should be writing tests!
    - Strive to write many small pure functions, and minimize where mutations occur.
    - Be cautious about stubs and mocks - they can make your tests more brittle.
-   - We primarily use [`mocha`](https://www.npmjs.com/package/mocha) at Airbnb. [`tape`](https://www.npmjs.com/package/tape) is also used occasionally for small, separate modules.
+   - We primarily use [`mocha`](https://www.npmjs.com/package/mocha) at Rapid7. [`tape`](https://www.npmjs.com/package/tape) is also used occasionally for small, separate modules.
    - 100% test coverage is a good goal to strive for, even if it's not always practical to reach it.
    - Whenever you fix a bug, _write a regression test_. A bug fixed without a regression test is almost certainly going to break again in the future.
 
@@ -2223,9 +2380,9 @@ Other Style Guides
 **Tools**
 
   - Code Style Linters
-    + [ESlint](http://eslint.org/) - [Airbnb Style .eslintrc](https://github.com/airbnb/javascript/blob/master/linters/.eslintrc)
-    + [JSHint](http://jshint.com/) - [Airbnb Style .jshintrc](https://github.com/airbnb/javascript/blob/master/linters/jshintrc)
-    + [JSCS](https://github.com/jscs-dev/node-jscs) - [Airbnb Style Preset](https://github.com/jscs-dev/node-jscs/blob/master/presets/airbnb.json)
+    + [ESlint](http://eslint.org/) - [Rapid7 Style .eslintrc](https://github.com/rapid7/javascript-style-guide/blob/master/linters/.eslintrc)
+    + [JSHint](http://jshint.com/) - [Rapid7 Style .jshintrc](https://github.com/rapid7/javascript-style-guide/blob/master/linters/jshintrc)
+    + [JSCS](https://github.com/jscs-dev/node-jscs) - [Rapid7 Style Preset](https://github.com/jscs-dev/node-jscs/blob/master/presets/rapid7.json)
 
 **Other Style Guides**
 
@@ -2236,7 +2393,7 @@ Other Style Guides
 **Other Styles**
 
   - [Naming this in nested functions](https://gist.github.com/cjohansen/4135065) - Christian Johansen
-  - [Conditional Callbacks](https://github.com/airbnb/javascript/issues/52) - Ross Allen
+  - [Conditional Callbacks](https://github.com/rapid7/javascript-style-guide/issues/52) - Ross Allen
   - [Popular JavaScript Coding Conventions on Github](http://sideeffect.kr/popularconvention/#javascript) - JeongHoon Byun
   - [Multiple var statements in JavaScript, not superfluous](http://benalman.com/news/2012/05/multiple-var-statements-javascript/) - Ben Alman
 
@@ -2294,7 +2451,7 @@ Other Style Guides
 
   - **Aan Zee**: [AanZee/javascript](https://github.com/AanZee/javascript)
   - **Adult Swim**: [adult-swim/javascript](https://github.com/adult-swim/javascript)
-  - **Airbnb**: [airbnb/javascript](https://github.com/airbnb/javascript)
+  - **Rapid7**: [rapid7/javascript-style-guide](https://github.com/rapid7/javascript-style-guide)
   - **Apartmint**: [apartmint/javascript](https://github.com/apartmint/javascript)
   - **Avalara**: [avalara/javascript](https://github.com/avalara/javascript)
   - **Billabong**: [billabong/javascript](https://github.com/billabong/javascript)
@@ -2374,22 +2531,22 @@ Other Style Guides
 
 ## The JavaScript Style Guide Guide
 
-  - [Reference](https://github.com/airbnb/javascript/wiki/The-JavaScript-Style-Guide-Guide)
+  - [Reference](https://github.com/rapid7/javascript-style-guide/wiki/The-JavaScript-Style-Guide-Guide)
 
 ## Chat With Us About JavaScript
 
-  - Find us on [gitter](https://gitter.im/airbnb/javascript).
+  - Find us on [gitter](https://gitter.im/rapid7/javascript-style-guide).
 
 ## Contributors
 
-  - [View Contributors](https://github.com/airbnb/javascript/graphs/contributors)
+  - [View Contributors](https://github.com/rapid7/javascript-style-guide/graphs/contributors)
 
 
 ## License
 
 (The MIT License)
 
-Copyright (c) 2014 Airbnb
+Copyright (c) 2014 Rapid7
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
