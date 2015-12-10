@@ -41,6 +41,42 @@
     }
   }
   ```
+  
+  - Always give the class a name
+  
+  ```javascript
+  // bad
+  class extends React.Component {
+    ...
+  }
+  
+  // good
+  class Foo extends React.Component {
+    ...
+  }
+  ```
+  
+## ES2015 syntax
+
+  - Use ES2015 syntax for all imports / exports
+    
+    ```javascript
+    // bad
+    var Dropdown = require('./Dropdown');
+    
+    // good
+    import Dropdown from './Dropdown';
+    
+    // bad
+    module.exports = React.createClass({
+      ...
+    });
+    
+    // good
+    export default class Foo extends React.Component {
+      ...
+    }
+    ```
 
 ## Naming
 
@@ -49,10 +85,10 @@
   - **Reference Naming**: Use PascalCase for React components and camelCase for their instances:
     ```javascript
     // bad
-    const reservationCard = require('./ReservationCard');
+    import reservationCard from './ReservationCard'
 
     // good
-    const ReservationCard = require('./ReservationCard');
+    import ReservationCard from './ReservationCard'
 
     // bad
     const ReservationItem = <ReservationCard />;
@@ -61,31 +97,77 @@
     const reservationItem = <ReservationCard />;
     ```
 
-    **Component Naming**: Use the filename as the component name. For example, `ReservationCard.jsx` should have a reference name of `ReservationCard`. However, for root components of a directory, use `index.jsx` as the filename and use the directory name as the component name:
+    **Component Naming**: Use the filename as the component name. For example, `ReservationCard.jsx` should have a reference name of `ReservationCard`.
     ```javascript
     // bad
-    const Footer = require('./Footer/Footer.jsx')
-
-    // bad
-    const Footer = require('./Footer/index.jsx')
+    import Footer = from './Footer/index'
 
     // good
     const Footer = require('./Footer')
     ```
-
+    
+    **Dedicated Sub-Component Naming**: Namespace them in a separate folder with the camelCase name of the component and include the component name as a prefix to all sub-components.
+    ```javascript
+    // bad
+    import Footer from './Footer';
+    import FooterContact from './Contact';
+    
+    // good
+    import Footer from './Footer';
+    import FooterContact from './footer/FooterContact';
+    ```
+    
+    > Why? Allows for easy searching of related files both visually and from an IDE search filename perspective.
 
 ## Declaration
-  - Do not use displayName for naming components. Instead, name the component by reference.
+  - Always create the displayName property for components, and have it match the class name.
 
     ```javascript
     // bad
-    export default React.createClass({
-      displayName: 'ReservationCard',
+    export default class ReservationCard extends React.Component {
       // stuff goes here
     });
 
     // good
     export default class ReservationCard extends React.Component {
+        displayName = 'ReservationCard';
+        // stuff goes here
+    }
+    ```
+    
+## PropTypes
+  - Always declare all PropTypes. For non-required props that are not functions, provide defaults.
+  
+    ```javascript
+    // bad
+    class Foo extends React.Component {
+        render() {
+            return (
+                <div id={this.props.id}>
+                    {this.props.name}
+                </div>
+            );
+        }
+    }
+    
+    // good
+    class Foo extends React.Component {
+        static propTypes = {
+            id:React.PropTypes.string.isRequired,
+            name:React.PropTypes.string
+        };
+        
+        static defaultProps = {
+            name:"Billy"
+        };
+        
+        render() {
+            return (
+                <div id={this.props.id}>
+                    {this.props.name}
+                </div>
+            );
+        }
     }
     ```
 
@@ -102,6 +184,13 @@
       superLongParam="bar"
       anotherSuperLongParam="baz"
     />
+    
+    // also good
+    <Foo
+      superLongParam="bar"
+      anotherSuperLongParam="baz">
+      Bar
+    </Foo>
 
     // if props fit in one line then keep it on the same line
     <Foo bar="bar" />
@@ -109,8 +198,7 @@
     // children get indented normally
     <Foo
       superLongParam="bar"
-      anotherSuperLongParam="baz"
-    >
+      anotherSuperLongParam="baz">
       <Spazz />
     </Foo>
     ```
@@ -137,6 +225,7 @@
 
 ## Spacing
   - Always include a single space in your self-closing tag.
+  
     ```javascript
     // bad
     <Foo/>
@@ -154,22 +243,40 @@
 
 ## Props
   - Always use camelCase for prop names.
+  
     ```javascript
     // bad
     <Foo
-      UserName="hello"
       phone_number={12345678}
+      UserName="hello"
     />
 
     // good
     <Foo
+      phoneNumber={12345678}
+      userName="hello"
+    />
+    ```
+  
+  - Always sort the prop names alphabetically
+  
+    ```javascript
+    // bad
+    <Foo
       userName="hello"
       phoneNumber={12345678}
     />
-    ```
+    
+    // good
+    <Foo
+      phoneNumber={12345678}
+      userName="hello"
+    />
+    ```  
 
 ## Parentheses
-  - Wrap JSX tags in parentheses when they span more than one line:
+  - Wrap JSX tags in parentheses:
+  
     ```javascript
     /// bad
     render() {
@@ -186,13 +293,8 @@
         </MyComponent>
       );
     }
-
-    // good, when single line
-    render() {
-      const body = <div>hello</div>;
-      return <MyComponent>{body}</MyComponent>;
-    }
     ```
+  > Why? All tags can now align with their respective closing tags when indented without extra whitespace.
 
 ## Tags
   - Always self-close tags that have no children.
@@ -222,7 +324,7 @@
   - Do not use underscore prefix for internal methods of a React component.
     ```javascript
     // bad
-    React.createClass({
+    class Foo extends React.Component {
       _onClickSubmit() {
         // do stuff
       }
@@ -231,7 +333,7 @@
     });
 
     // good
-    class extends React.Component {
+    class Foo extends React.Component {
       onClickSubmit() {
         // do stuff
       }
@@ -244,8 +346,15 @@
 
   - Ordering for class extends React.Component:
   
+  1. displayName
+  1. propTypes
+  1. contextTypes
+  1. childContextTypes
+  1. defaultProps
   1. constructor
-  1. optional static methods
+  1. getDefaultProps
+  1. getInitialState
+  1. state
   1. getChildContext
   1. componentWillMount
   1. componentDidMount
@@ -254,27 +363,30 @@
   1. componentWillUpdate
   1. componentDidUpdate
   1. componentWillUnmount
-  1. *clickHandlers or eventHandlers* like onClickSubmit() or onChangeDescription()
-  1. *getter methods for render* like getSelectReason() or getFooterContent()
-  1. *Optional render methods* like renderNavigation() or renderProfilePicture()
+  1. optional static properties (alphabetized)
+  1. optional instance properties (alphabetized)
+  1. optional static methods (alphabetized)
+  1. optional instance methods (alphabetized)
   1. render
 
   - How to define propTypes, defaultProps, contextTypes, etc...  
 
   ```javascript
-  import React, { Component, PropTypes } from 'react';
+  import React from 'react';
   
-  const propTypes = {
-    id: PropTypes.number.isRequired,
-    url: PropTypes.string.isRequired,
-    text: PropTypes.string,
-  };
+  export default class Link extends Component {
+    displayName = 'Link';
+    
+    static propTypes = {
+        id: React.PropTypes.number.isRequired,
+        url: React.PropTypes.string.isRequired,
+        text: React.PropTypes.string,
+    };
+    
+    static defaultProps = {
+        text: 'Hello World',
+    };
   
-  const defaultProps = {
-    text: 'Hello World',
-  };
-  
-  class Link extends Component {
     static methodsAreOk() {
       return true;
     }
@@ -283,35 +395,6 @@
       return <a href={this.props.url} data-id={this.props.id}>{this.props.text}</a>
     }
   }
-  
-  Link.propTypes = propTypes;
-  Link.defaultProps = defaultProps;
-  
-  export default Link;
   ```
-
-  - Ordering for React.createClass:
-
-  1. displayName
-  1. propTypes
-  1. contextTypes
-  1. childContextTypes
-  1. mixins
-  1. statics
-  1. defaultProps
-  1. getDefaultProps
-  1. getInitialState
-  1. getChildContext
-  1. componentWillMount
-  1. componentDidMount
-  1. componentWillReceiveProps
-  1. shouldComponentUpdate
-  1. componentWillUpdate
-  1. componentDidUpdate
-  1. componentWillUnmount
-  1. *clickHandlers or eventHandlers* like onClickSubmit() or onChangeDescription()
-  1. *getter methods for render* like getSelectReason() or getFooterContent()
-  1. *Optional render methods* like renderNavigation() or renderProfilePicture()
-  1. render
 
 **[⬆ back to top](#table-of-contents)**
