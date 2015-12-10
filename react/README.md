@@ -396,7 +396,14 @@
     }
   
     render() {
-      return <a href={this.props.url} data-id={this.props.id}>{this.props.text}</a>
+      return (
+        <a 
+          data-id={this.props.id}
+          href={this.props.url} 
+        >
+          {this.props.text}
+        </a>
+      );
     }
   }
   ```
