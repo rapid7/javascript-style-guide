@@ -1,8 +1,9 @@
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/rapid7/javascript?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
 # Rapid7 JavaScript Style Guide() {
 
 *A mostly reasonable approach to JavaScript*
+
+> **WARNING** - This file received only minimal scrutiny after forking from Airbnb's guide.  Use our es6 styleguide
+  and ignore the es6 specific features, rather than using this.  Kept for reference only.
 
 
 ## Table of Contents
@@ -86,7 +87,7 @@
     var item = {};
     ```
 
-  - Don't use [reserved words](http://es5.github.io/#x7.6.1) as keys. It won't work in IE8. [More info](https://github.com/rapid7/javascript-style-guide/issues/61).
+  - Don't use [reserved words](http://es5.github.io/#x7.6.1) as keys. It won't work in IE8. [More info](https://github.com/airbnb/javascript/issues/61).
 
     ```javascript
     // bad
@@ -151,9 +152,9 @@
   - When you need to copy an array use Array#slice. [jsPerf](http://jsperf.com/converting-arguments-to-an-array/7)
 
     ```javascript
-    var len = items.length;
-    var itemsCopy = [];
-    var i;
+    var len = items.length,
+        itemsCopy = [],
+        i;
 
     // bad
     for (i = 0; i < len; i++) {
@@ -169,7 +170,7 @@
     ```javascript
     function trigger() {
       var args = Array.prototype.slice.call(arguments);
-      ...
+      // ...
     }
     ```
 
@@ -216,23 +217,18 @@
   - When programmatically building up a string, use Array#join instead of string concatenation. Mostly for IE: [jsPerf](http://jsperf.com/string-vs-array-concat/2).
 
     ```javascript
-    var items;
-    var messages;
-    var length;
-    var i;
-
-    messages = [{
-      state: 'success',
-      message: 'This one worked.'
-    }, {
-      state: 'success',
-      message: 'This one worked as well.'
-    }, {
-      state: 'error',
-      message: 'This one did not work.'
-    }];
-
-    length = messages.length;
+    var messages = [{
+          state: 'success',
+          message: 'This one worked.'
+        }, {
+          state: 'success',
+          message: 'This one worked as well.'
+        }, {
+          state: 'error',
+          message: 'This one did not work.'
+        }],
+        length = messages.length,
+        items, i;
 
     // bad
     function inbox(messages) {
@@ -267,7 +263,7 @@
 
     ```javascript
     // anonymous function expression
-    var anonymous = function() {
+    var anonymous = function () {
       return true;
     };
 
@@ -279,7 +275,7 @@
     // immediately-invoked function expression (IIFE)
     (function() {
       console.log('Welcome to the Internet. Please follow me.');
-    })();
+    }());
     ```
 
   - Never declare a function in a non-function block (if, while, etc). Assign the function to a variable instead. Browsers will allow you to do it, but they all interpret it differently, which is bad news bears.
@@ -295,6 +291,7 @@
 
     // good
     var test;
+
     if (currentUser) {
       test = function test() {
         console.log('Yup.');
@@ -417,7 +414,7 @@
 
     ```javascript
     // bad
-    function() {
+    function () {
       test();
       console.log('doing stuff..');
 
@@ -433,7 +430,7 @@
     }
 
     // good
-    function() {
+    function () {
       var name = getName();
 
       test();
@@ -449,7 +446,7 @@
     }
 
     // bad - unnecessary function call
-    function() {
+    function () {
       var name = getName();
 
       if (!arguments.length) {
@@ -462,7 +459,7 @@
     }
 
     // good
-    function() {
+    function () {
       var name;
 
       if (!arguments.length) {
@@ -517,7 +514,7 @@
 
       anonymous(); // => TypeError anonymous is not a function
 
-      var anonymous = function() {
+      var anonymous = function () {
         console.log('anonymous function expression');
       };
     }
@@ -635,10 +632,10 @@
     }
 
     // bad
-    function() { return false; }
+    function () { return false; }
 
     // good
-    function() {
+    function () {
       return false;
     }
     ```
@@ -768,17 +765,17 @@
 
     ```javascript
     // bad
-    function() {
+    function () {
     ∙∙∙∙var name;
     }
 
     // bad
-    function() {
+    function () {
     ∙var name;
     }
 
     // good
-    function() {
+    function () {
     ∙∙var name;
     }
     ```
@@ -847,24 +844,24 @@
 
     ```javascript
     // bad
-    (function(global) {
+    (function (global) {
       // ...stuff...
-    })(this);
+    }(this));
     ```
 
     ```javascript
     // bad
-    (function(global) {
+    (function (global) {
       // ...stuff...
-    })(this);↵
+    }(this));↵
     ↵
     ```
 
     ```javascript
     // good
-    (function(global) {
+    (function (global) {
       // ...stuff...
-    })(this);↵
+    }(this);↵
     ```
 
   - Use indentation when making long method chains. Use a leading dot, which
@@ -925,19 +922,19 @@
 
     // bad
     var obj = {
-      foo: function() {
+      foo: function () {
       },
-      bar: function() {
+      bar: function () {
       }
     };
     return obj;
 
     // good
     var obj = {
-      foo: function() {
+      foo: function () {
       },
 
-      bar: function() {
+      bar: function () {
       }
     };
 
@@ -1020,22 +1017,22 @@
 
     ```javascript
     // bad
-    (function() {
+    (function () {
       var name = 'Skywalker'
       return name
-    })()
+    }())
 
-    // good
-    (function() {
+   ) // good
+    (function () {
       var name = 'Skywalker';
       return name;
-    })();
+    }();
 
     // good (guards against the function becoming an argument when two files with IIFEs are concatenated)
-    ;(function() {
+    ;(function () {
       var name = 'Skywalker';
       return name;
-    })();
+    }();
     ```
 
     [Read more](http://stackoverflow.com/a/7365214/1712802).
@@ -1193,25 +1190,25 @@
 
     ```javascript
     // bad
-    function() {
+    function () {
       var self = this;
-      return function() {
+      return function () {
         console.log(self);
       };
     }
 
     // bad
-    function() {
+    function () {
       var that = this;
-      return function() {
+      return function () {
         console.log(that);
       };
     }
 
     // good
-    function() {
+    function () {
       var _this = this;
-      return function() {
+      return function () {
         console.log(_this);
       };
     }
@@ -1221,7 +1218,7 @@
 
     ```javascript
     // bad
-    var log = function(msg) {
+    var log = function (msg) {
       console.log(msg);
     };
 
@@ -1297,11 +1294,11 @@
       this.set('lightsaber', lightsaber);
     }
 
-    Jedi.prototype.set = function(key, val) {
+    Jedi.prototype.set = function (key, val) {
       this[key] = val;
     };
 
-    Jedi.prototype.get = function(key) {
+    Jedi.prototype.get = function (key) {
       return this[key];
     };
     ```
@@ -1343,12 +1340,12 @@
 
     ```javascript
     // bad
-    Jedi.prototype.jump = function() {
+    Jedi.prototype.jump = function () {
       this.jumping = true;
       return true;
     };
 
-    Jedi.prototype.setHeight = function(height) {
+    Jedi.prototype.setHeight = function (height) {
       this.height = height;
     };
 
@@ -1357,12 +1354,12 @@
     luke.setHeight(20); // => undefined
 
     // good
-    Jedi.prototype.jump = function() {
+    Jedi.prototype.jump = function () {
       this.jumping = true;
       return this;
     };
 
-    Jedi.prototype.setHeight = function(height) {
+    Jedi.prototype.setHeight = function (height) {
       this.height = height;
       return this;
     };
@@ -1404,7 +1401,7 @@
 
     ...
 
-    $(this).on('listingUpdated', function(e, listingId) {
+    $(this).on('listingUpdated', function (e, listingId) {
       // do something with listingId
     });
     ```
@@ -1417,7 +1414,7 @@
 
     ...
 
-    $(this).on('listingUpdated', function(e, data) {
+    $(this).on('listingUpdated', function (e, data) {
       // do something with data.listingId
     });
     ```
@@ -1435,7 +1432,7 @@
     ```javascript
     // fancyInput/fancyInput.js
 
-    !function(global) {
+    !function (global) {
       'use strict';
 
       var previousFancyInput = global.FancyInput;
@@ -1530,7 +1527,7 @@
   - **Yup.**
 
     ```javascript
-    function() {
+    function () {
       return true;
     }
     ```
@@ -1627,86 +1624,6 @@
 
 **[⬆ back to top](#table-of-contents)**
 
-## In the Wild
-
-  This is a list of organizations that are using this style guide. Send us a pull request or open an issue and we'll add you to the list.
-
-  - **Aan Zee**: [AanZee/javascript](https://github.com/AanZee/javascript)
-  - **Adult Swim**: [adult-swim/javascript](https://github.com/adult-swim/javascript)
-  - **Rapid7**: [rapid7/javascript](https://github.com/rapid7/javascript)
-  - **Apartmint**: [apartmint/javascript](https://github.com/apartmint/javascript)
-  - **Avalara**: [avalara/javascript](https://github.com/avalara/javascript)
-  - **Billabong**: [billabong/javascript](https://github.com/billabong/javascript)
-  - **Compass Learning**: [compasslearning/javascript-style-guide](https://github.com/compasslearning/javascript-style-guide)
-  - **DailyMotion**: [dailymotion/javascript](https://github.com/dailymotion/javascript)
-  - **Digitpaint** [digitpaint/javascript](https://github.com/digitpaint/javascript)
-  - **Evernote**: [evernote/javascript-style-guide](https://github.com/evernote/javascript-style-guide)
-  - **ExactTarget**: [ExactTarget/javascript](https://github.com/ExactTarget/javascript)
-  - **Flexberry**: [Flexberry/javascript-style-guide](https://github.com/Flexberry/javascript-style-guide)
-  - **Gawker Media**: [gawkermedia/javascript](https://github.com/gawkermedia/javascript)
-  - **General Electric**: [GeneralElectric/javascript](https://github.com/GeneralElectric/javascript)
-  - **GoodData**: [gooddata/gdc-js-style](https://github.com/gooddata/gdc-js-style)
-  - **Grooveshark**: [grooveshark/javascript](https://github.com/grooveshark/javascript)
-  - **How About We**: [howaboutwe/javascript](https://github.com/howaboutwe/javascript)
-  - **InfoJobs**: [InfoJobs/JavaScript-Style-Guide](https://github.com/InfoJobs/JavaScript-Style-Guide)
-  - **Intent Media**: [intentmedia/javascript](https://github.com/intentmedia/javascript)
-  - **Jam3**: [Jam3/Javascript-Code-Conventions](https://github.com/Jam3/Javascript-Code-Conventions)
-  - **JSSolutions**: [JSSolutions/javascript](https://github.com/JSSolutions/javascript)
-  - **Kinetica Solutions**: [kinetica/javascript](https://github.com/kinetica/javascript)
-  - **Mighty Spring**: [mightyspring/javascript](https://github.com/mightyspring/javascript)
-  - **MinnPost**: [MinnPost/javascript](https://github.com/MinnPost/javascript)
-  - **ModCloth**: [modcloth/javascript](https://github.com/modcloth/javascript)
-  - **Money Advice Service**: [moneyadviceservice/javascript](https://github.com/moneyadviceservice/javascript)
-  - **Muber**: [muber/javascript](https://github.com/muber/javascript)
-  - **National Geographic**: [natgeo/javascript](https://github.com/natgeo/javascript)
-  - **National Park Service**: [nationalparkservice/javascript](https://github.com/nationalparkservice/javascript)
-  - **Nimbl3**: [nimbl3/javascript](https://github.com/nimbl3/javascript)
-  - **Nordic Venture Family**: [CodeDistillery/javascript](https://github.com/CodeDistillery/javascript)
-  - **Orion Health**: [orionhealth/javascript](https://github.com/orionhealth/javascript)
-  - **Peerby**: [Peerby/javascript](https://github.com/Peerby/javascript)
-  - **Razorfish**: [razorfish/javascript-style-guide](https://github.com/razorfish/javascript-style-guide)
-  - **reddit**: [reddit/styleguide/javascript](https://github.com/reddit/styleguide/tree/master/javascript)
-  - **REI**: [reidev/js-style-guide](https://github.com/reidev/js-style-guide)
-  - **Ripple**: [ripple/javascript-style-guide](https://github.com/ripple/javascript-style-guide)
-  - **SeekingAlpha**: [seekingalpha/javascript-style-guide](https://github.com/seekingalpha/javascript-style-guide)
-  - **Shutterfly**: [shutterfly/javascript](https://github.com/shutterfly/javascript)
-  - **StudentSphere**: [studentsphere/javascript](https://github.com/studentsphere/javascript)
-  - **Super**: [SuperJobs/javascript](https://github.com/SuperJobs/javascript)
-  - **Target**: [target/javascript](https://github.com/target/javascript)
-  - **TheLadders**: [TheLadders/javascript](https://github.com/TheLadders/javascript)
-  - **T4R Technology**: [T4R-Technology/javascript](https://github.com/T4R-Technology/javascript)
-  - **VoxFeed**: [VoxFeed/javascript-style-guide](https://github.com/VoxFeed/javascript-style-guide)
-  - **Weggo**: [Weggo/javascript](https://github.com/Weggo/javascript)
-  - **Zillow**: [zillow/javascript](https://github.com/zillow/javascript)
-  - **ZocDoc**: [ZocDoc/javascript](https://github.com/ZocDoc/javascript)
-
-## Translation
-
-  This style guide is also available in other languages:
-
-  - ![br](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Brazil.png) **Brazilian Portuguese**: [armoucar/javascript-style-guide](https://github.com/armoucar/javascript-style-guide)
-  - ![bg](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Bulgaria.png) **Bulgarian**: [borislavvv/javascript](https://github.com/borislavvv/javascript)
-  - ![ca](https://raw.githubusercontent.com/fpmweb/javascript-style-guide/master/img/catala.png) **Catalan**: [fpmweb/javascript-style-guide](https://github.com/fpmweb/javascript-style-guide)
-  - ![tw](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Taiwan.png) **Chinese(Traditional)**: [jigsawye/javascript](https://github.com/jigsawye/javascript)
-  - ![cn](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/China.png) **Chinese(Simplified)**: [sivan/javascript-style-guide](https://github.com/sivan/javascript-style-guide)
-  - ![fr](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/France.png) **French**: [nmussy/javascript-style-guide](https://github.com/nmussy/javascript-style-guide)
-  - ![de](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Germany.png) **German**: [timofurrer/javascript-style-guide](https://github.com/timofurrer/javascript-style-guide)
-  - ![it](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Italy.png) **Italian**: [sinkswim/javascript-style-guide](https://github.com/sinkswim/javascript-style-guide)
-  - ![jp](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Japan.png) **Japanese**: [mitsuruog/javacript-style-guide](https://github.com/mitsuruog/javacript-style-guide)
-  - ![kr](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/South-Korea.png) **Korean**: [tipjs/javascript-style-guide](https://github.com/tipjs/javascript-style-guide)
-  - ![pl](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Poland.png) **Polish**: [mjurczyk/javascript](https://github.com/mjurczyk/javascript)
-  - ![ru](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Russia.png) **Russian**: [uprock/javascript](https://github.com/uprock/javascript)
-  - ![es](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Spain.png) **Spanish**: [paolocarrasco/javascript-style-guide](https://github.com/paolocarrasco/javascript-style-guide)
-  - ![th](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Thailand.png) **Thai**: [lvarayut/javascript-style-guide](https://github.com/lvarayut/javascript-style-guide)
-
-## The JavaScript Style Guide Guide
-
-  - [Reference](https://github.com/rapid7/javascript-style-guide/wiki/The-JavaScript-Style-Guide-Guide)
-
-## Chat With Us About JavaScript
-
-  - Find us on [gitter](https://gitter.im/rapid7/javascript).
-
 ## Contributors
 
   - [View Contributors](https://github.com/rapid7/javascript-style-guide/graphs/contributors)
@@ -1716,7 +1633,7 @@
 
 (The MIT License)
 
-Copyright (c) 2014 Rapid7
+Copyright (c) 2015 Rapid7
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
