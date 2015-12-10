@@ -5,9 +5,10 @@
 ## Table of Contents
 
   1. [Basic Rules](#basic-rules)
-  1. [Class vs React.createClass](#basic-rules)
+  1. [ES2015 Syntax](#es2015-syntax)
   1. [Naming](#naming)
   1. [Declaration](#declaration)
+  1. [PropTypes](#proptypes)
   1. [Alignment](#alignment)
   1. [Quotes](#quotes)
   1. [Spacing](#spacing)
