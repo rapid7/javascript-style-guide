@@ -5,6 +5,7 @@
 ## Table of Contents
 
   1. [Basic Rules](#basic-rules)
+  1. [Class vs React.createClass](#basic-rules)
   1. [Naming](#naming)
   1. [Declaration](#declaration)
   1. [Alignment](#alignment)
@@ -21,10 +22,30 @@
   - Only include one React component per file.
   - Always use JSX syntax.
   - Do not use `React.createElement` unless you're initializing the app from a file that is not JSX.
+  
+## ES2015 syntax
 
-## Class vs React.createClass
+  - Use ES2015 syntax for all imports / exports
+    
+    ```javascript
+    // bad
+    var Dropdown = require('./Dropdown');
+    
+    // good
+    import Dropdown from './Dropdown';
+    
+    // bad
+    module.exports = React.createClass({
+      ...
+    });
+    
+    // good
+    export default class Foo extends React.Component {
+      ...
+    }
+    ```
 
-  - Use class extends React.Component unless you have a very good reason to use mixins.
+  - Use class extends React.Component instead of React.createClass.
 
   ```javascript
   // bad
@@ -55,28 +76,6 @@
     ...
   }
   ```
-  
-## ES2015 syntax
-
-  - Use ES2015 syntax for all imports / exports
-    
-    ```javascript
-    // bad
-    var Dropdown = require('./Dropdown');
-    
-    // good
-    import Dropdown from './Dropdown';
-    
-    // bad
-    module.exports = React.createClass({
-      ...
-    });
-    
-    // good
-    export default class Foo extends React.Component {
-      ...
-    }
-    ```
 
 ## Naming
 
