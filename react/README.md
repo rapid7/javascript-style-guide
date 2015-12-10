@@ -278,15 +278,21 @@
     ```javascript
     /// bad
     render() {
-      return <MyComponent className="long body" foo="bar">
-               <MyChild />
-             </MyComponent>;
+      return <MyComponent 
+        className="long body" 
+        foo="bar"
+      >
+        <MyChild />
+      </MyComponent>;
     }
 
     // good
     render() {
       return (
-        <MyComponent className="long body" foo="bar">
+        <MyComponent 
+          className="long body" 
+          foo="bar"
+        >
           <MyChild />
         </MyComponent>
       );
