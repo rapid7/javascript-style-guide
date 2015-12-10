@@ -183,27 +183,23 @@
 
     // good
     <Foo
-      superLongParam="bar"
       anotherSuperLongParam="baz"
-    />
-    
-    // also good
-    <Foo
       superLongParam="bar"
-      anotherSuperLongParam="baz">
-      Bar
-    </Foo>
+    />
 
     // if props fit in one line then keep it on the same line
     <Foo bar="bar" />
 
-    // children get indented normally
+    // children get indented normally, but the opening tag end still gets new line
     <Foo
       superLongParam="bar"
-      anotherSuperLongParam="baz">
+      anotherSuperLongParam="baz"
+    >
       <Spazz />
     </Foo>
     ```
+  
+  > Why? Allows for easy understanding of properties associated with component, and where the properties end and the child begins.
 
 ## Quotes
   - Always use double quotes (`"`) for JSX attributes, but single quotes for all other JS.
