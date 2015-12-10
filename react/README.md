@@ -283,8 +283,6 @@
       style={fooStyle}
     />
     ```
-    
-  > Why? The object would be re-instantiated on every render, and if the values are consistent it is an unneeded computational expense.
 
 ## Parentheses
   - Wrap JSX tags in parentheses:
