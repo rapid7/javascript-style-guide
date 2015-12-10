@@ -73,7 +73,7 @@
   }
   
   // good
-  class Foo extends React.Component {
+  class Listing extends React.Component {
     ...
   }
   ```
@@ -91,10 +91,10 @@
     import ReservationCard from './ReservationCard'
 
     // bad
-    const ReservationItem = <ReservationCard />;
+    const ReservationCardElement = <ReservationCard />;
 
     // good
-    const reservationItem = <ReservationCard />;
+    const reservationCard = <ReservationCard />;
     ```
 
     **Component Naming**: Use the filename as the component name. For example, `ReservationCard.jsx` should have a reference name of `ReservationCard`.
