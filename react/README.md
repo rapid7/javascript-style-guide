@@ -213,12 +213,6 @@
 
     // good
     <Foo bar="bar" />
-
-    // bad
-    <Foo style={{ left: "20px" }} />
-
-    // good
-    <Foo style={{ left: '20px' }} />
     ```
 
 ## Spacing
@@ -270,7 +264,25 @@
       phoneNumber={12345678}
       userName="hello"
     />
-    ```  
+    ```
+      
+  - All prop values that are mutable (arrays, objects, date, etc.) must be assigned to variables.
+  
+    ```jaavscript
+    // bad
+    <Foo
+      style={{ color: "red }}
+    />
+    
+    // good
+    const fooStyle = {
+      color:"red"
+    };
+    
+    <Foo
+      style={fooStyle}
+    />
+    ```
 
 ## Parentheses
   - Wrap JSX tags in parentheses:
