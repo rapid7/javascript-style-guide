@@ -187,7 +187,7 @@
       superLongParam="bar"
     />
 
-    // if props fit in one line then keep it on the same line
+    // if only one prop then keep it on the same line
     <Foo bar="bar" />
 
     // children get indented normally, but the opening tag end still gets new line
