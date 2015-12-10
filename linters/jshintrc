@@ -1,4 +1,8 @@
 {
+  /**
+   * @deprecated JSHint doesn't work well with es2015
+   */
+
   /*
    * ENVIRONMENTS
    * =================

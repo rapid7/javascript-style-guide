@@ -1,5 +1,6 @@
 /**
  * Rapid7 JSHint settings for use with SublimeLinter and Sublime Text 2.
+ * @deprecated JSHint doesn't work well with es2015
  *
  *   1. Install SublimeLinter at https://github.com/SublimeLinter/SublimeLinter
  *   2. Open user preferences for the SublimeLinter package in Sublime Text 2
