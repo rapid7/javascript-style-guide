@@ -266,7 +266,7 @@
     />
     ```
       
-  - All prop values that are mutable (arrays, objects, date, etc.) must be assigned to variables.
+  - All prop values that are mutable (arrays, objects, dates, etc.) must be assigned to variables.
   
     ```jaavscript
     // bad
