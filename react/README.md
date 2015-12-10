@@ -381,8 +381,8 @@
   1. componentWillUnmount
   1. optional static properties (alphabetized)
   1. optional instance properties (alphabetized)
-  1. optional static methods (alphabetized)
-  1. optional instance methods (alphabetized)
+  1. optional public static methods (alphabetized)
+  1. optional instance and private static methods (top down / order of operations)
   1. render
 
   - How to define propTypes, defaultProps, contextTypes, etc...  
