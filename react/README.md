@@ -152,6 +152,8 @@
     
     // good
     class Foo extends React.Component {
+        displayName = 'Foo';
+    
         static propTypes = {
             id:React.PropTypes.string.isRequired,
             name:React.PropTypes.string
