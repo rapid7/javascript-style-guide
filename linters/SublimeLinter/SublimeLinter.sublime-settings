@@ -1,5 +1,6 @@
 /**
- * Airbnb JSHint settings for use with SublimeLinter and Sublime Text 2.
+ * Rapid7 JSHint settings for use with SublimeLinter and Sublime Text 2.
+ * @deprecated JSHint doesn't work well with es2015
  *
  *   1. Install SublimeLinter at https://github.com/SublimeLinter/SublimeLinter
  *   2. Open user preferences for the SublimeLinter package in Sublime Text 2
@@ -63,11 +64,11 @@
 
       // Warn when variables are defined but never used.
       "unused": true,
-      
-      // Enforce line length to 80 characters
-      "maxlen": 80,
+
+      // Enforce line length to 120 characters
+      "maxlen": 120,
 
       // Enforce placing 'use strict' at the top function scope
-      "strict": true
+      "strict": false
     }
 }
