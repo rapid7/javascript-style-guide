@@ -141,7 +141,7 @@ Other Style Guides
       let c;
       const b = 43;
       if (b > 1) {
-        a = 'no
+        a = 'no';
       }
       c = a + b;
     }
