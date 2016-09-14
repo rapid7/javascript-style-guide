@@ -44,8 +44,8 @@
 
 ## Naming
 
-  - **Extensions**: Use `.jsx` extension for React components.
-  - **Filename**: Use PascalCase for filenames. E.g., `ReservationCard.jsx`.
+  - **Extensions**: Use `.js` extension for React components.
+  - **Filename**: Use PascalCase for filenames. E.g., `ReservationCard.js`.
   - **Reference Naming**: Use PascalCase for React components and camelCase for their instances:
     ```javascript
     // bad
@@ -61,13 +61,13 @@
     const reservationItem = <ReservationCard />;
     ```
 
-    **Component Naming**: Use the filename as the component name. For example, `ReservationCard.jsx` should have a reference name of `ReservationCard`. However, for root components of a directory, use `index.jsx` as the filename and use the directory name as the component name:
+    **Component Naming**: Use the filename as the component name. For example, `ReservationCard.js` should have a reference name of `ReservationCard`. However, for root components of a directory, use `index.js` as the filename and use the directory name as the component name:
     ```javascript
     // bad
-    const Footer = require('./Footer/Footer.jsx')
+    const Footer = require('./Footer/Footer.js')
 
     // bad
-    const Footer = require('./Footer/index.jsx')
+    const Footer = require('./Footer/index.js')
 
     // good
     const Footer = require('./Footer')
@@ -87,6 +87,12 @@
     // good
     export default class ReservationCard extends React.Component {
     }
+    
+    // good
+    class ReservationCard extends React.Component {
+    }
+    
+    export default ReservationCard;
     ```
 
 ## Alignment
@@ -100,18 +106,18 @@
     // good
     <Foo
       superLongParam="bar"
-      anotherSuperLongParam="baz"
+      superLongParamAlso="baz"
     />
 
     // if props fit in one line then keep it on the same line
-    <Foo bar="bar" />
+    <Foo bar="bar"/>
 
     // children get indented normally
     <Foo
       superLongParam="bar"
-      anotherSuperLongParam="baz"
+      superLongParamAlso="baz"
     >
-      <Spazz />
+      <Spazz/>
     </Foo>
     ```
 
@@ -123,20 +129,14 @@
 
     ```javascript
     // bad
-    <Foo bar='bar' />
+    <Foo bar='bar'/>
 
     // good
-    <Foo bar="bar" />
-
-    // bad
-    <Foo style={{ left: "20px" }} />
-
-    // good
-    <Foo style={{ left: '20px' }} />
+    <Foo bar="bar"/>
     ```
 
 ## Spacing
-  - Always include a single space in your self-closing tag.
+  - Always remove ending space in your self-closing tag.
     ```javascript
     // bad
     <Foo/>
@@ -148,8 +148,11 @@
     <Foo
      />
 
-    // good
+    // bad
     <Foo />
+
+    // good
+    <Foo/>
     ```
 
 ## Props
@@ -157,19 +160,19 @@
     ```javascript
     // bad
     <Foo
-      UserName="hello"
       phone_number={12345678}
+      UserName="hello"
     />
 
     // good
     <Foo
-      userName="hello"
       phoneNumber={12345678}
+      userName="hello"
     />
     ```
 
 ## Parentheses
-  - Wrap JSX tags in parentheses when they span more than one line:
+  - Wrap JSX tags in parentheses when returned:
     ```javascript
     /// bad
     render() {
@@ -187,10 +190,15 @@
       );
     }
 
-    // good, when single line
+    // good
     render() {
       const body = <div>hello</div>;
-      return <MyComponent>{body}</MyComponent>;
+      
+      return (
+        <MyComponent>
+          {body}
+        </MyComponent>
+      );
     }
     ```
 
@@ -201,7 +209,7 @@
     <Foo className="stuff"></Foo>
 
     // good
-    <Foo className="stuff" />
+    <Foo className="stuff"/>
     ```
 
   - If your component has multi-line properties, close its tag on a new line.
@@ -244,37 +252,43 @@
 
   - Ordering for class extends React.Component:
 
-  1. constructor
-  1. optional static methods
-  1. getChildContext
-  1. componentWillMount
-  1. componentDidMount
-  1. componentWillReceiveProps
-  1. shouldComponentUpdate
-  1. componentWillUpdate
-  1. componentDidUpdate
-  1. componentWillUnmount
-  1. *clickHandlers or eventHandlers* like onClickSubmit() or onChangeDescription()
-  1. *getter methods for render* like getSelectReason() or getFooterContent()
-  1. *Optional render methods* like renderNavigation() or renderProfilePicture()
-  1. render
+  1. propTypes
+  2. defaultProps
+  3. contextTypes
+  4. constructor
+  5. optional static methods
+  6. getChildContext
+  7. componentWillMount
+  8. componentDidMount
+  9. componentWillReceiveProps
+  10. shouldComponentUpdate
+  11. componentWillUpdate
+  12. componentDidUpdate
+  13. componentWillUnmount
+  14. *clickHandlers or eventHandlers* like onClickSubmit() or onChangeDescription()
+  15. *getter methods for render* like getSelectReason() or getFooterContent()
+  16. *Optional render methods* like renderNavigation() or renderProfilePicture()
+  17. render
 
   - How to define propTypes, defaultProps, contextTypes, etc...
 
   ```javascript
-  import React, { Component, PropTypes } from 'react';
-
-  const propTypes = {
-    id: PropTypes.number.isRequired,
-    url: PropTypes.string.isRequired,
-    text: PropTypes.string,
-  };
-
-  const defaultProps = {
-    text: 'Hello World',
-  };
+  import React, { 
+    Component, 
+    PropTypes 
+  } from 'react';
 
   class Link extends Component {
+    static propTypes = {
+      id: PropTypes.number.isRequired,
+      url: PropTypes.string.isRequired,
+      text: PropTypes.string
+    };
+    
+    static defaultProps = {
+      text: 'Hello World'
+    };
+  
     static methodsAreOk() {
       return true;
     }
@@ -284,34 +298,7 @@
     }
   }
 
-  Link.propTypes = propTypes;
-  Link.defaultProps = defaultProps;
-
   export default Link;
   ```
-
-  - Ordering for React.createClass:
-
-  1. displayName
-  1. propTypes
-  1. contextTypes
-  1. childContextTypes
-  1. mixins
-  1. statics
-  1. defaultProps
-  1. getDefaultProps
-  1. getInitialState
-  1. getChildContext
-  1. componentWillMount
-  1. componentDidMount
-  1. componentWillReceiveProps
-  1. shouldComponentUpdate
-  1. componentWillUpdate
-  1. componentDidUpdate
-  1. componentWillUnmount
-  1. *clickHandlers or eventHandlers* like onClickSubmit() or onChangeDescription()
-  1. *getter methods for render* like getSelectReason() or getFooterContent()
-  1. *Optional render methods* like renderNavigation() or renderProfilePicture()
-  1. render
 
 **[⬆ back to top](#table-of-contents)**
