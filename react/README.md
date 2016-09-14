@@ -252,10 +252,10 @@
 
   - Ordering for class extends React.Component:
 
-  1. propTypes
-  2. defaultProps
-  3. contextTypes
-  4. constructor
+  1. constructor
+  2. propTypes
+  3. defaultProps
+  4. contextTypes
   5. optional static methods
   6. getChildContext
   7. componentWillMount
