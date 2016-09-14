@@ -958,7 +958,7 @@ Other Style Guides
 
   - [10.1](#10.1) <a name='10.1'></a> Always use modules (`import`/`export`) over a non-standard module system. You can always transpile to your preferred module system.
 
-  > Why? Modules are the future, let's start using the future now.
+  > Why? Modules are the current standard, let's start using it now.
 
     ```javascript
     // bad
@@ -974,9 +974,9 @@ Other Style Guides
     export default es6;
     ```
 
-  - [10.2](#10.2) <a name='10.2'></a> Do not use wildcard imports.
+  - [10.2](#10.2) <a name='10.2'></a> Only use wildcard imports when testing.
 
-  > Why? This makes sure you have a single default export.
+  > Why? This makes sure you have a single default export, and imports of it are reduced to the specific function. In testing it is okay because it may be required for stubbing / spying.
 
     ```javascript
     // bad
@@ -993,11 +993,16 @@ Other Style Guides
     ```javascript
     // bad
     // filename es6.js
-    export { es6 as default } from './rapid7StyleGuide';
+    export { 
+     es6 as default 
+    } from './rapid7StyleGuide';
 
     // good
     // filename es6.js
-    import { es6 } from './Rapid7StyleGuide';
+    import { 
+     es6 
+    } from './Rapid7StyleGuide';
+    
     export default es6;
     ```
 
@@ -1020,6 +1025,7 @@ Other Style Guides
 
     // bad
     let sum = 0;
+    
     for (let num of numbers) {
       sum += num;
     }
@@ -1028,17 +1034,24 @@ Other Style Guides
 
     // good
     let sum = 0;
-    numbers.forEach((num) => sum += num);
+    
+    numbers.forEach((num) => {
+     return num += sum;
+    });
+    
     sum === 15;
 
     // best (use the functional force)
-    const sum = numbers.reduce((total, num) => total + num, 0);
+    const sum = numbers.reduce((total, num) => {
+     return total + num;
+    }, 0);
+    
     sum === 15;
     ```
 
   - [11.2](#11.2) <a name='11.2'></a> Don't use generators for now.
 
-  > Why? They don't transpile well to ES5.
+  > Why? Most situations do not require the control flow specificity of generators, prefer async/await or Promises.
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -1089,9 +1102,11 @@ Other Style Guides
     // bad
     class Person {
       age = 12;
+      
       validAge() {
         return this.age > 18 && this.age < 35;
       }
+      
       onClickSubmit() {
         if (!this.validAge()) {
           console.error('Your age is not valid');
@@ -1100,11 +1115,11 @@ Other Style Guides
     }
 
     // good
+    const AGE_MINIMUM = 18;
+    const AGE_MAXIMUM = 35;
+    const ERROR_ARE_INVALID = 'Your age is not valid';
+    
     class Person {
-      static AGE_MINIMUM = 18;
-      static AGE_MAXIMUM = 35;
-      static ERROR_AGE_INVALID = 'Your age is not valid';
-
       age = 12;
 
       validAge() {
@@ -1122,7 +1137,7 @@ Other Style Guides
 
 ## Variables
 
-  - [13.1](#13.1) <a name='13.1'></a> Always use `const` to declare variables. Not doing so will result in global variables. We want to avoid polluting the global namespace. Captain Planet warned us of that.
+  - [13.1](#13.1) <a name='13.1'></a> Always use `const` or `let` to declare variables. Not doing so will result in global variables. We want to avoid polluting the global namespace. Captain Planet warned us of that.
 
     ```javascript
     // bad
@@ -1156,7 +1171,7 @@ Other Style Guides
     const dragonball = 'z';
     ```
 
-  - [13.3](#13.3) <a name='13.3'></a> Group all your `const`s and then group all your `let`s.
+  - [13.3](#13.3) <a name='13.3'></a> Group all your `const`s and then afterward group all your `let`s.
 
   > Why? This is helpful when later on you might need to assign a variable depending on one of the previous assigned variables.
 
@@ -1176,11 +1191,7 @@ Other Style Guides
     // good
     const goSportsTeam = true;
     const items = getItems();
-    let dragonball, i, length;
-
-    // also good
-    const goSportsTeam = true,
-        items = getItems();
+    
     let dragonball, i, length;
     ```
 
@@ -1335,7 +1346,7 @@ Other Style Guides
 
 ## Comparison Operators & Equality
 
-  - [15.1](#15.1) <a name='15.1'></a> Use `===` and `!==` over `==` and `!=`.
+  - [15.1](#15.1) <a name='15.1'></a> Always use `===` and `!==` over `==` and `!=`.
   - [15.2](#15.2) <a name='15.2'></a> Conditional statements such as the `if` statement evaluate their expression using coercion with the `ToBoolean` abstract method and always follow these simple rules:
 
   eslint rules: [`eqeqeq`](http://eslint.org/docs/rules/eqeqeq.html).
@@ -1536,14 +1547,11 @@ Other Style Guides
     ```javascript
     class Calculator {
       /**
-       * @type {Number}
-       */
-      total = 0;
-
-      /**
-       * @param {Number} firstNumber
-       * @param {Number} secondNumber
-       * @returns {Number} The result of adding firstNumber and secondNumber
+       * adds the firstNumber to the secondNumber
+       *
+       * @param {number} firstNumber
+       * @param {number} secondNumber
+       * @returns {number} The result of adding firstNumber and secondNumber
        */
       add(firstNumber, secondNumber) {
         return firstNumber + secondNumber;
@@ -1697,7 +1705,8 @@ Other Style Guides
         .call(tron.led);
 
     // good
-    const leds = stage.selectAll('.led')
+    const leds = stage
+        .selectAll('.led')
         .data(data)
         .enter()
         .append('svg:svg')
@@ -1839,20 +1848,20 @@ Other Style Guides
     console.log(foo[0]);
     ```
 
-  - [18.11](#18.11) <a name='18.11'></a> Add spaces inside curly braces.
+  - [18.11](#18.11) <a name='18.11'></a> Do not add spaces inside curly braces.
 
   eslint rules: [`object-curly-spacing`](http://eslint.org/docs/rules/object-curly-spacing.html).
 
     ```javascript
     // bad
-    const foo = {clark: 'kent'};
+    const foo = { clark: 'kent' };
 
     // good
-    const foo = { clark: 'kent' };
+    const foo = {clark: 'kent'};
     ```
 
 
-  - [18.12](#18.12) <a name='18.12'></a> Maximum line length is 120 characters
+  - [18.12](#18.12) <a name='18.12'></a> Maximum line length is 80 characters
 
   > Why? Long lines are difficult to read themselves and in diffs, and they make viewing code side-by-side difficult
 
@@ -2189,9 +2198,6 @@ Other Style Guides
     function getTimeInUtc(date) {}
     ```
 
-
-
-
 **[⬆ back to top](#table-of-contents)**
 
 
@@ -2214,7 +2220,7 @@ Other Style Guides
     dragon.setAge(25);
     ```
 
-  - [23.3](#23.3) <a name='23.3'></a> If the property is a `boolean`, use `isVal()` or `hasVal()`.
+  - [23.3](#23.3) <a name='23.3'></a> If the property is a `boolean`, use a state-based descriptor such as `isVal()`, `hasVal()`, or `shouldHaveVal()`.
 
     ```javascript
     // bad
@@ -2252,7 +2258,7 @@ Other Style Guides
 
 ## Events
 
-  - [24.1](#24.1) <a name='24.1'></a> When attaching data payloads to events (whether DOM events or something more proprietary like Backbone events), pass a hash instead of a raw value. This allows a subsequent contributor to add more data to the event payload without finding and updating every handler for the event. For example, instead of:
+  - [24.1](#24.1) <a name='24.1'></a> When attaching data payloads to events (whether DOM events or something more proprietary like Backbone events), pass an object instead of a raw value. This allows a subsequent contributor to add more data to the event payload without finding and updating every handler for the event. For example, instead of:
 
     ```javascript
     // bad
