@@ -364,16 +364,25 @@ Other Style Guides
     const items = [];
     ```
 
-  - [4.2](#4.2) <a name='4.2'></a> Use Array#push instead of direct assignment to add items to an array.
+  - [4.2](#4.2) <a name='4.2'></a> Use Array#concat or spread operator instead of direct assignment to add items to an array.
 
     ```javascript
-    const someStack = [];
+    let someStack = [];
 
     // bad
     someStack[someStack.length] = 'abracadabra';
 
     // good
-    someStack.push('abracadabra');
+    let someStack = [];
+    
+    someStack = someStack.concat(['abracadabra']);
+    
+    // best
+    const originalStack = ['foo'];
+    const newStack = [
+     ...originalStack,
+     'bar'
+    ];
     ```
 
   <a name="es6-array-spreads"></a>
@@ -390,13 +399,17 @@ Other Style Guides
     }
 
     // good
-    const itemsCopy = [...items];
+    const itemsCopy = [
+     ...items
+    ];
     ```
-  - [4.4](#4.4) <a name='4.4'></a> To convert an array-like object to an array, use Array#from.
+  - [4.4](#4.4) <a name='4.4'></a> To convert an array-like object to an array, use the spread operator.
 
     ```javascript
-    const foo = document.querySelectorAll('.foo');
-    const nodes = Array.from(foo);
+    const nodes = document.querySelectorAll('.foo');
+    const arrayOfNodes = [
+     ...nodes
+    ];
     ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -418,12 +431,16 @@ Other Style Guides
 
     // good
     function getFullName(obj) {
-      const { firstName, lastName } = obj;
+      const { 
+       firstName, 
+       lastName 
+      } = obj;
+      
       return `${firstName} ${lastName}`;
     }
 
     // best
-    function getFullName({ firstName, lastName }) {
+    function getFullName({firstName, lastName}) {
       return `${firstName} ${lastName}`;
     }
     ```
@@ -438,7 +455,10 @@ Other Style Guides
     const second = arr[1];
 
     // good
-    const [first, second] = arr;
+    const [
+     first,
+     second
+    ] = arr;
     ```
 
   - [5.3](#5.3) <a name='5.3'></a> Use object destructuring for multiple return values, not array destructuring.
@@ -482,7 +502,7 @@ Other Style Guides
     const name = 'Capt. Janeway';
     ```
 
-  - [6.2](#6.2) <a name='6.2'></a> Strings longer than 100 characters should be written across multiple lines using string concatenation.
+  - [6.2](#6.2) <a name='6.2'></a> Strings longer than 80 characters should be written across multiple lines using string concatenation.
   - [6.3](#6.3) <a name='6.3'></a> Note: If overused, long strings with concatenation could impact performance. [jsPerf](http://jsperf.com/ya-string-concat) & [Discussion](https://github.com/rapid7/javascript-style-guide/issues/40).
 
     ```javascript
@@ -499,6 +519,13 @@ Other Style Guides
     const errorMessage = 'This is a super long error that was thrown because ' +
       'of Batman. When you stop to think about how Batman had anything to do ' +
       'with this, you would get nowhere fast.';
+      
+    // also good
+    const errorMessage = [
+     'This is a super long error that was thrown because ',
+     'of Batman. When you stop to think about how Batman had anything to do ',
+     'with this, you would get nowhere fast.'
+    ].join('');
     ```
 
   <a name="es6-template-literals"></a>
@@ -531,24 +558,27 @@ Other Style Guides
 
 ## Functions
 
-  - [7.1](#7.1) <a name='7.1'></a> Use function declarations instead of function expressions.
+  - [7.1](#7.1) <a name='7.1'></a> Use function expressions instead of function declarations (arrow functions whenever `this` is not necessary).
 
-  > Why? Function declarations are named, so they're easier to identify in call stacks. Also, the whole body of a function declaration is hoisted, whereas only the reference of a function expression is hoisted. This rule makes it possible to always use [Arrow Functions](#arrow-functions) in place of function expressions.
+  > Why? Prevents memory from being allocated when not necessary, and forces habit of writing pure functions
 
     ```javascript
     // bad
-    const foo = function () {
+    function foo() {
     };
 
+    // ok
+    const foo = function foo() {
+    };
+    
     // good
-    function foo() {
-    }
+    const foo = () => {
+    };
     ```
 
-  - [7.2](#7.2) <a name='7.2'></a> Function expressions:
+  - [7.2](#7.2) <a name='7.2'></a> Immediately-Invoked Function Expressions (IIFE):
 
     ```javascript
-    // immediately-invoked function expression (IIFE)
     (() => {
       console.log('Welcome to the Internet. Please follow me.');
     }());
@@ -567,6 +597,7 @@ Other Style Guides
 
     // good
     let test;
+    
     if (currentUser) {
       test = () => {
         console.log('Yup.');
@@ -638,8 +669,9 @@ Other Style Guides
   > Why? They are confusing to reason about.
 
   ```javascript
-  let b = 1;
   // bad
+  let b = 1;
+  
   function count(a = b++) {
     console.log(a);
   }
@@ -653,12 +685,12 @@ Other Style Guides
 
     ```javascript
     // bad
-    function handleThings(opts = {}, name) {
+    const handleThings = (opts = {}, name) => {
       // ...
     }
 
     // good
-    function handleThings(name, opts = {}) {
+    const handleThings = (name, opts = {}) => {
       // ...
     }
     ```
@@ -695,7 +727,7 @@ Other Style Guides
   const y = function a() {};
   ```
 
-- [7.12](#7.12) <a name="7.12"></a> Avoid long functions.  If your function is over 25 lines, it should most likely be refactored.
+- [7.12](#7.12) <a name="7.12"></a> Avoid long functions.  If your function is over 30 lines, it should most likely be refactored.
 
   > Why? Long functions are difficult to test, more likely to break, are not single purpose
 
@@ -724,13 +756,15 @@ Other Style Guides
         return developer;
       });
     }
+    
     // good
-    transformDevelopers(developers) {
-      return developers.map(this.transformDeveloper);
-    }
     transformDeveloper(developer) {
       developer.fullName = developer.firstName + developer.lastName;
       return developer;
+    }
+    
+    transformDevelopers(developers) {
+      return developers.map(this.transformDeveloper);
     }
   }
   ```
@@ -766,7 +800,6 @@ Other Style Guides
   > Why? It shows clearly where the function starts and ends.
 
     eslint rules: [`arrow-parens`](http://eslint.org/docs/rules/arrow-parens.html)
-
 
     ```js
     // bad
@@ -813,6 +846,7 @@ Other Style Guides
     function Queue(contents = []) {
       this._queue = [...contents];
     }
+    
     Queue.prototype.pop = function () {
       const value = this._queue[0];
       this._queue.splice(0, 1);
@@ -825,6 +859,7 @@ Other Style Guides
       constructor(contents = []) {
         this._queue = [...contents];
       }
+      
       pop() {
         const value = this._queue[0];
         this._queue.splice(0, 1);
@@ -840,10 +875,13 @@ Other Style Guides
     ```javascript
     // bad
     const inherits = require('inherits');
+    
     function PeekableQueue(contents) {
       Queue.apply(this, contents);
     }
+    
     inherits(PeekableQueue, Queue);
+    
     PeekableQueue.prototype.peek = function () {
       return this._queue[0];
     }
@@ -870,6 +908,7 @@ Other Style Guides
     };
 
     const luke = new Jedi();
+    
     luke.jump(); // => true
     luke.setHeight(20); // => undefined
 
@@ -888,7 +927,8 @@ Other Style Guides
 
     const luke = new Jedi();
 
-    luke.jump()
+    luke
+      .jump()
       .setHeight(20);
     ```
 
