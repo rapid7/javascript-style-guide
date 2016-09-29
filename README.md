@@ -469,20 +469,63 @@ Other Style Guides
     // bad
     function processInput(input) {
       // then a miracle occurs
-      return [left, right, top, bottom];
+      return [
+       left, 
+       right, 
+       top, 
+       bottom
+      ];
     }
 
     // the caller needs to think about the order of return data
-    const [left, __, top] = processInput(input);
+    const [
+     left, 
+     __, 
+     top
+    ] = processInput(input);
 
     // good
     function processInput(input) {
       // then a miracle occurs
-      return { left, right, top, bottom };
+      return {
+       left, 
+       right, 
+       top, 
+       bottom
+      };
     }
 
     // the caller selects only the data they need
-    const { left, right } = processInput(input);
+    const { 
+     left, 
+     right 
+    } = processInput(input);
+    ```
+
+  - [5.4](#5.4) <a name='5.4'></a> When destructuring in variable assignment, newline all values
+
+  > Why? This helps with readability and creates an extensible style for any size destructuring
+
+    ```javascript
+    // bad
+    const {one, two, ...rest} = obj;
+    
+    // good
+    const {
+     one,
+     two,
+     ...rest
+    } = obj;
+
+    // bad
+    const [first, ...middle, last] = arr;
+    
+    // good
+    const [
+     first,
+     ...middle,
+     last
+    ] = arr;
     ```
 
 
