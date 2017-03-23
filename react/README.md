@@ -24,11 +24,11 @@
 
 ## Class vs React.createClass
 
-  - Use class extends React.Component unless you have a very good reason to use mixins.
+  - Use class extends Component always.
 
   ```javascript
   // bad
-  const Listing = React.createClass({
+  const Listing = createClass({
     render() {
       return <div />;
     }
@@ -61,13 +61,10 @@
     const reservationItem = <ReservationCard />;
     ```
 
-    **Component Naming**: Use the filename as the component name. For example, `ReservationCard.js` should have a reference name of `ReservationCard`. However, for root components of a directory, use `index.js` as the filename and use the directory name as the component name:
+    **Component Naming**: Use the filename as the component name. For example, `ReservationCard.js` should have a reference name of `ReservationCard`.
     ```javascript
     // bad
-    const Footer = require('./Footer/Footer.js')
-
-    // bad
-    const Footer = require('./Footer/index.js')
+    const FooterComponent = require('./Footer')
 
     // good
     const Footer = require('./Footer')
@@ -79,17 +76,16 @@
 
     ```javascript
     // bad
-    export default React.createClass({
-      displayName: 'ReservationCard',
-      // stuff goes here
-    });
+    export default class ReservationCard extends Component {
+      displayName = 'ReservationCard';
+    }
 
     // good
-    export default class ReservationCard extends React.Component {
+    export default class ReservationCard extends Component {
     }
     
-    // good
-    class ReservationCard extends React.Component {
+    // best
+    class ReservationCard extends Component {
     }
     
     export default ReservationCard;
@@ -189,17 +185,6 @@
         </MyComponent>
       );
     }
-
-    // good
-    render() {
-      const body = <div>hello</div>;
-      
-      return (
-        <MyComponent>
-          {body}
-        </MyComponent>
-      );
-    }
     ```
 
 ## Tags
@@ -227,7 +212,7 @@
     ```
 
 ## Methods
-  - Do not use underscore prefix for internal methods of a React component.
+  - Do not use underscored prefixes for internal methods of a React component.
     ```javascript
     // bad
     React.createClass({
@@ -254,8 +239,8 @@
 
   1. constructor
   2. propTypes
-  3. defaultProps
-  4. contextTypes
+  3. contextTypes
+  4. defaultProps
   5. optional static methods
   6. getChildContext
   7. componentWillMount
@@ -265,10 +250,8 @@
   11. componentWillUpdate
   12. componentDidUpdate
   13. componentWillUnmount
-  14. *clickHandlers or eventHandlers* like onClickSubmit() or onChangeDescription()
-  15. *getter methods for render* like getSelectReason() or getFooterContent()
-  16. *Optional render methods* like renderNavigation() or renderProfilePicture()
-  17. render
+  14. Instance methods (preferrably alphabetized)
+  15. render
 
   - How to define propTypes, defaultProps, contextTypes, etc...
 
