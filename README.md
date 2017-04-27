@@ -5,6 +5,9 @@
 Other Style Guides
  - [ES5](es5/)
  - [React](react/)
+ 
+IDE configuration
+ - [.editorconfig](ide/.editorconfig)
 
 ## Table of Contents
 
