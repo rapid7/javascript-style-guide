@@ -123,7 +123,7 @@
   };
   ```
 
-## Manually-created synchronous actions
+## Manual synchronous actions
 
   - [3.1](#3.1) <a name='3.1'></a> **Follow FSA standards**: Follow [Flux Standard Action](https://github.com/acdlite/flux-standard-action) guidelines for building actions.
 
@@ -182,7 +182,7 @@
   };
   ```
 
-## Manually-created asynchronous actions
+## Manual asynchronous actions
 
   - [4.1](#4.1) <a name='3.1'></a> **Use separate action types for async call stages**: Prefer specific action types for each stage of async call instead of single action type.
 

@@ -10,7 +10,7 @@ IDE configuration
  - [.editorconfig](ide/.editorconfig)
 
 Coding convention cheatsheets
- - [APIs](cheatsheets/api.md)
+ - [APIs](cheatsheets/apis.md)
  - [Redux](cheatsheets/redux.md)
 
 ## Table of Contents
