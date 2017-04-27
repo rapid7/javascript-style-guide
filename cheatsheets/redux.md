@@ -309,7 +309,9 @@
   } from 'redux-actions';
 
   // actions
-  import * as actions from 'actions/stuff';
+  import {
+    ACTION_TYPES
+  } from 'actions/stuff';
 
   export const INITIAL_STATE = {
     error: null,
@@ -342,9 +344,9 @@
   };
 
   export default handleActions({
-    [actions.getStuffFail]: handleFail,
-    [actions.getStuffPending]: handlePending,
-    [actions.getStuffSuccess]: handleSuccess,
+    [ACTION_TYPES.GET_FAIL]: handleFail,
+    [ACTION_TYPES.GET_PENDING]: handlePending,
+    [ACTION_TYPES.GET_SUCCESS]: handleSuccess
   }, INITIAL_STATE);
   ```
 
