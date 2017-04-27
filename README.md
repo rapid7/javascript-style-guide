@@ -5,9 +5,13 @@
 Other Style Guides
  - [ES5](es5/)
  - [React](react/)
- 
+
 IDE configuration
  - [.editorconfig](ide/.editorconfig)
+
+Coding convention cheatsheets
+ - [APIs](cheatsheets/api.md)
+ - [Redux](cheatsheets/redux.md)
 
 ## Table of Contents
 
