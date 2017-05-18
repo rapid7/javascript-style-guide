@@ -31,6 +31,7 @@
   - [1.2](#1.2) <a name='1.2'></a> **babel-preset-stage-2**
 
   > Why? Allows for likely future additions to the spec to be coded today.
+  
   > Why stage 2? Early enough in the process that it will not be included for some time, however the likelihood of the proposal is very high because the draft has been accepted.
 
   ```javascript
