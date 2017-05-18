@@ -89,7 +89,6 @@
   };
 
   getChildContext() {
-    // everyone gets the whole store
     return {
       region: 'US'
     };
