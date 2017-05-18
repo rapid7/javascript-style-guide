@@ -55,7 +55,26 @@
 
   - [3.1](#3.1) <a name='3.1'></a> **If building a consumable package, favor internal state**: If your component will be consumed by a parent application, avoid the need for a specific state management solution if possible.
 
-  > Why? Creates more flexibility in what applications can consume your package.
+  > Why? Creates more flexibility in what applications can consume your package, and avoids unneeded dependencies.
+
+  ```javascript
+  // bad
+  const mapStateToProps = ({component}) => {
+    return {
+      isActive: component.isActive
+    };
+  };
+
+  @connect(mapStateToProps)
+  class UsesActiveState extends PureComponent {
+
+  // good
+  class UsesActiveState extends PureComponent {
+    state = {
+      isActive: false
+    };
+  }
+  ```
 
 ## Context
 
@@ -63,6 +82,38 @@
 
   > Why? It is considered bad practice for every component to know everything, instead favor passing values as props, or storing values in app-level state and connecting your component.
 
+  ```javascript
+  // bad
+  childContextTypes = {
+    region: PropTypes.string
+  };
+
+  getChildContext() {
+    // everyone gets the whole store
+    return {
+      region: 'US'
+    };
+  }
+
+  // good
+  const mapStateToProps = ({app}) => {
+    return {
+      region: app.region
+    };
+  };
+
+  @connect(mapStateToProps)
+  class UsingRegion extends PureComponent {
+  ```
+
   - [4.2](#4.2) <a name='4.2'></a> **If building a consumable package, don't do it**: If your component will be consumed by a parent application, it should use props instead
 
   > Why? Creates unnecessary tight-coupling that is implicit, and passing the value through props is very cheap.
+
+  ```javascript
+  // bad
+  <UsesRegion/>
+
+  // good
+  <UsesRegion region="US"/>
+  ```
