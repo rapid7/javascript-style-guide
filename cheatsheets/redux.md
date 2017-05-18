@@ -1,3 +1,5 @@
+# Redux
+
 ## Table of Contents
 
   1. [All actions](#redux-actions)
@@ -82,8 +84,6 @@
     };
   };
   ```
-
-  This is not a hard requirement, but it is definitely a huge timesaver and minimal footprint, plus it conforms to all of our rules (which are born out of the FSA standard).
 
   - [2.2](#2.2) <a name='2.2'></a> **Place API calls in separate file**: Do not make API calls within the action, instead call a function imported from an API file.
 
