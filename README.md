@@ -14,6 +14,9 @@ IDE configuration
  - [.editorconfig](ide/.editorconfig)
 
 Coding convention cheatsheets
+ - [Babel](cheatsheets/babel.md)
+ - [Component](cheatsheets/component.md)
+ - [NPM Package](cheatsheets/npm-package.md)
  - [Redux](cheatsheets/redux.md)
  - [Services](cheatsheets/services.md)
 
