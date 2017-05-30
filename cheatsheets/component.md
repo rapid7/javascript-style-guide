@@ -80,7 +80,7 @@
 
   - [4.1](#4.1) <a name='4.1'></a> **If building a standalone application, limit it's use**: Choose the values you put in context carefully
 
-  > Why? It is considered bad practice for every component to know everything, instead favor passing values as props, or storing values in app-level state and connecting your component.
+  > Why? It is considered bad practice for every component to know everything, instead favor passing values as props, or storing values in app-level state and connecting your component. [Even Facebook says to avoid it if possible.](https://facebook.github.io/react/docs/context.html#why-not-to-use-context)
 
   ```javascript
   // bad
