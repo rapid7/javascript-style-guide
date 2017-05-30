@@ -1,10 +1,12 @@
+# Service
+
 ## Table of Contents
 
   1. [Structure](#structure)
 
 ## Structure
 
-  - [1.1](#1.1) <a name='1.1'></a> **Async function vs. Promise**: Prefer the use of async functions for API calls.
+  - [1.1](#1.1) <a name='1.1'></a> **Async function vs. Promise**: Prefer the use of [async functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) for API calls.
 
   > Why? async functions have a more declarative and readable structure.
 

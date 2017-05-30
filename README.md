@@ -2,6 +2,10 @@
 
 *A mostly reasonable approach to JavaScript*
 
+The goal of this style guide is not to proclaim that these are the best ways, nor the only ways, to accomplish well-structured code. Rather, the goal is to ensure the code follows a consistent and predictable structure, so that all developers within the ecosystem can easily jump into the codebase and hit the ground running. This makes everything simpler, from application maintenance to submitting PRs for shared packages on our private NPM structure.
+
+Like all code, this style guide is intended to be community-driven, and evolve as the times do. If you feel something is missing or needs tweaking, all PRs are welcome.
+
 Other Style Guides
  - [ES5](es5/)
  - [React](react/)
@@ -10,8 +14,14 @@ IDE configuration
  - [.editorconfig](ide/.editorconfig)
 
 Coding convention cheatsheets
- - [APIs](cheatsheets/apis.md)
+ - [Babel](cheatsheets/babel.md)
+ - [Component](cheatsheets/component.md)
+ - [NPM Package](cheatsheets/npm-package.md)
  - [Redux](cheatsheets/redux.md)
+ - [Services](cheatsheets/services.md)
+
+ESLint rules (applies this guide as linting rules):
+ - [eslint-config-rapid7](https://github.com/rapid7/eslint-config-rapid7)
 
 ## Table of Contents
 
