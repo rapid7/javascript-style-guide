@@ -29,6 +29,16 @@
   };
   ```
 
+  It is also recommended to use the [namespace-constants](https://www.npmjs.com/package/namespace-constants) package, as it provides a consolidated interface to accomplish this same task.
+
+  ```javascript
+  import createConstants from 'namespace-constants';
+
+  export const ACTION_TYPES = createConstants('userData', [
+    'LOAD'
+  ]);
+  ```
+
 ## Redux actions
 
   - [2.1](#2.1) <a name='2.1'></a> **Use redux-actions if possible**: Prefer redux-actions over manually building your own actions.
