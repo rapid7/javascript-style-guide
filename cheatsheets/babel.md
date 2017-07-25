@@ -66,7 +66,17 @@ The plugins to include is highly-dependent on the package / application you are 
   ]
   ```
 
-  - [2.2](#2.2) <a name='2.2'></a> **babel-plugin-transform-decorators-legacy**: Handles conversion of the `@decorator` syntax.
+  - [2.2](#2.2) <a name='2.2'></a> **babel-plugin-add-react-displayname**: Automatically adds the state displayName property to all class and functional react components.
+
+  > Why? Helpful in production to prevent minified code from having mangled component names.
+
+  ```javascript
+  "plugins": [
+    "add-react-displayname"
+  ]
+  ```
+  
+  - [2.3](#2.3) <a name='2.3'></a> **babel-plugin-transform-decorators-legacy**: Handles conversion of the `@decorator` syntax.
 
   > Why? Needed if you consider the syntax of greater convenience over the standard function wrapping technique.
 
@@ -76,7 +86,7 @@ The plugins to include is highly-dependent on the package / application you are 
   ]
   ```
 
-  - [2.3](#2.3) <a name='2.3'></a> **babel-plugin-add-module-exports**: Adds automatic conversion of files that use ES2015 `export` syntax with only a default export to also include `module.exports` assignment.
+  - [2.4](#2.4) <a name='2.4'></a> **babel-plugin-add-module-exports**: Adds automatic conversion of files that use ES2015 `export` syntax with only a default export to also include `module.exports` assignment.
 
   > Why? If your package combines ES2015 syntax with CommonJS syntax for imports / requires, this allows you to use them interchangeably.
 
@@ -86,7 +96,7 @@ The plugins to include is highly-dependent on the package / application you are 
   ]
   ```
 
-  - [2.4](#2.4) <a name='2.4'></a> **babel-plugin-transform-react-remove-prop-types**: Removes assignment of `prop-types` from component declarations for `react`.
+  - [2.5](#2.5) <a name='2.5'></a> **babel-plugin-transform-react-remove-prop-types**: Removes assignment of `prop-types` from component declarations for `react`.
 
   > Why? If your package is a standalone application (not a consumed package) and includes the use of `react` it is advised that production builds strip prop types for filesize reasons.
 
