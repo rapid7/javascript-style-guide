@@ -353,7 +353,7 @@ rules: [
       path.resolve(__dirname, 'src')
     ],
     use: [
-      {loader: 'style-loader},
+      {loader: 'style-loader'},
       {
         loader: 'css-loader',
         options: {
@@ -361,7 +361,7 @@ rules: [
         }
       },
       {
-        loader: 'postcss-loader,
+        loader: 'postcss-loader',
         options: {
           plugins() {
             return [
