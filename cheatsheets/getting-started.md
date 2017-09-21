@@ -20,6 +20,7 @@
   * [Setting up React](#setting-up-react)
 * [Adding Rapid7 styles](#adding-rapid7-styles)
   * [Install related dependencies](#install-related-dependencies)
+  * [Add style rules to Webpack](#add-style-rules-to-webpack)
   * [Add the styles](#add-the-styles)
 
 ## Setting up npm
@@ -339,6 +340,8 @@ Rapid7 styles are not actually styles, but rather a collection of Sass mixins th
   * style-loader
   
 Lot's of dev dependencies, but basically each loader is a cascading handler of a specific thing ... `sass-loader` uses `node-sass` to compile the sass files to a format that `css-loader` expects, which builds standard CSS into a string that `style-loader` can use to inject into the DOM. `postcss-loader` is present to provide prefixes and such for older browsers ... think of it as Babel for CSS.
+
+#### Add style rules to Webpack
 
 Once you've installed those packages, you can add the following rule to your webpack.config.js file:
 
