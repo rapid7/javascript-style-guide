@@ -12,6 +12,9 @@ Other Style Guides
 
 IDE configuration
  - [.editorconfig](ide/.editorconfig)
+ 
+Building applications
+ - [Getting started](cheatsheets/getting-started.md)
 
 Coding convention cheatsheets
  - [Babel](cheatsheets/babel.md)
