@@ -21,11 +21,10 @@
 * [Adding Rapid7 styles](#adding-rapid7-styles)
   * [Install related dependencies](#install-related-dependencies)
   * [Add the styles](#add-the-styles)
-  
-
-npm is the crux of all modern JavaScript development … I won't begin to describe it because I will not do it justice, but if you are unfamiliar with it I advise you learn because without it … we are all lost.
 
 ## Setting up npm
+
+npm is the crux of all modern JavaScript development … I won't begin to describe it because I will not do it justice, but if you are unfamiliar with it I advise you learn because without it … we are all lost.
 
 #### Environment
 
