@@ -904,7 +904,7 @@ ESLint rules (applies this guide as linting rules):
 
 ## Classes
 
-  > NOTE: Classes are generally discouraged, as functional composition is the vastly preferred approach. If you must use a class, these are general guidelines for working with them, however you should attempt to solve the problem in a more functional way if possible.
+  > NOTE: Except for React class components, the use of classes are generally discouraged, as functional composition is the vastly preferred approach. If you must use a class, these are general guidelines for working with them, however you should attempt to solve the problem in a more functional way if possible.
 
   - [9.1](#9.1) <a name='9.1'></a> Always use `class`. Avoid manipulating `prototype` directly.
 
