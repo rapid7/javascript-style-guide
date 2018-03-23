@@ -785,12 +785,16 @@ ESLint rules (applies this guide as linting rules):
   > Why? Long functions are difficult to test, more likely to break, are not single purpose
 
    eslint rules: [`max-statements`](http://eslint.org/docs/rules/max-statements.html).
+   
+  > NOTE: The maximum statements will be limited to _25 lines_ when using _rapid7/strict_
 
 - [7.13](#7.13) <a name="7.13"></a> Avoid deeply nested code
 
   > Why? Deeply nested code makes testing difficult and is usually a sign that that your function is doing too much
 
    eslint rules: [`max-depth`](http://eslint.org/docs/rules/max-depth.html).
+   
+  > NOTE: The maximum depth will be limited to _1_ when using _rapid7/strict_
 
 - [7.14](#7.14) <a name='7.14'></a> Instance methods or pure functions are preferred to anonymous functions
 
