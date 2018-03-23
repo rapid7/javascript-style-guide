@@ -334,6 +334,8 @@ ESLint rules (applies this guide as linting rules):
 
   > Why? It's easier to find a specific property in a large property list.
 
+  eslint rules: [`sort-keys`](http://eslint.org/docs/rules/sort-keys.html). _(applied via rapid7/strict)_
+
   ```javascript
   const anakinSkywalker = 'Anakin Skywalker';
   const lukeSkywalker = 'Luke Skywalker';
