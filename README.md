@@ -204,43 +204,8 @@ ESLint rules (applies this guide as linting rules):
   const item = {};
   ```
 
-  - [3.2](#3.2) <a name='3.2'></a> If your code will be executed in browsers in script context, avoid using [reserved words](http://es5.github.io/#x7.6.1) as keys. (https://github.com/airbnb/javascript/issues/61). It’s OK to use them in ES6 modules and server-side code, but can serve as a potential confusion point for developers because of IDE highlighting.
-
-  ```javascript
-  // bad
-  const superman = {
-    default: { clark: 'kent' },
-    private: true
-  };
-
-  // good
-  const superman = {
-    defaults: { clark: 'kent' },
-    hidden: true
-  };
-  ```
-
-  - [3.3](#3.3) <a name='3.3'></a> Use readable synonyms in place of reserved words.
-
-  ```javascript
-  // bad
-  const superman = {
-    class: 'alien',
-  };
-
-  // bad
-  const superman = {
-    klass: 'alien',
-  };
-
-  // good
-  const superman = {
-    type: 'alien',
-  };
-  ```
-
   <a name="es6-computed-properties"></a>
-  - [3.4](#3.4) <a name='3.4'></a> Use computed property names when creating objects with dynamic property names.
+  - [3.2](#3.2) <a name='3.2'></a> Use computed property names when creating objects with dynamic property names.
 
   > Why? They allow you to define all the properties of an object in one place.
 
@@ -267,7 +232,7 @@ ESLint rules (applies this guide as linting rules):
   ```
 
   <a name="es6-object-shorthand"></a>
-  - [3.5](#3.5) <a name='3.5'></a> Use object method shorthand.
+  - [3.3](#3.3) <a name='3.3'></a> Use object method shorthand.
 
   eslint rules: [`object-shorthand`](http://eslint.org/docs/rules/object-shorthand.html).
 
@@ -292,7 +257,7 @@ ESLint rules (applies this guide as linting rules):
   ```
 
   <a name="es6-object-concise"></a>
-  - [3.6](#3.6) <a name='3.6'></a> Use property value shorthand.
+  - [3.4](#3.4) <a name='3.4'></a> Use property value shorthand.
 
   > Why? It is shorter to write and descriptive.
 
@@ -312,7 +277,7 @@ ESLint rules (applies this guide as linting rules):
   };
   ```
 
-  - [3.7](#3.7) <a name='3.7'></a> Alphabetize your object properties.
+  - [3.5](#3.5) <a name='3.5'></a> Alphabetize your object properties.
 
   > Why? It's easier to find a specific property in a large property list.
 
@@ -436,23 +401,7 @@ ESLint rules (applies this guide as linting rules):
   }
   ```
 
-  - [5.2](#5.2) <a name='5.2'></a> Use array destructuring for access to indices when possible.
-
-  ```javascript
-  const arr = [1, 2, 3, 4];
-
-  // bad
-  const first = arr[0];
-  const second = arr[1];
-
-  // good
-  const [
-   first,
-   second
-  ] = arr;
-  ```
-
-  - [5.3](#5.3) <a name='5.3'></a> Use object destructuring for multiple return values, not array destructuring.
+  - [5.2](#5.2) <a name='5.2'></a> Use object destructuring for multiple return values, not array destructuring.
 
   > Why? You can add new properties over time or change the order of things without breaking call sites.
 
@@ -493,7 +442,7 @@ ESLint rules (applies this guide as linting rules):
   } = processInput(input);
   ```
 
-  - [5.4](#5.4) <a name='5.4'></a> When destructuring in variable assignment, newline all values
+  - [5.3](#5.3) <a name='5.3'></a> When destructuring in variable assignment, newline all values
 
   > Why? This helps with readability and creates an extensible style for any size destructuring
 
