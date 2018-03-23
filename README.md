@@ -999,19 +999,7 @@ ESLint rules (applies this guide as linting rules):
   export default es6;
   ```
 
-  - [10.2](#10.2) <a name='10.2'></a> Use wildcard imports strategically, preferring use of named or default imports.
-
-  > Why? This makes sure you have a single default export, and imports of it are reduced to the specific function. In testing it is useful because it may be required for stubbing / spying, and in specific scenarios like redux actions it makes for a more concise mapping to props.
-
-  ```javascript
-  // bad
-  import * as Rapid7StyleGuide from './Rapid7StyleGuide';
-
-  // good
-  import Rapid7StyleGuide from './Rapid7StyleGuide';
-  ```
-
-  - [10.3](#10.3) <a name='10.3'></a>And do not export directly from an import.
+  - [10.2](#10.2) <a name='10.2'></a>And do not export directly from an import.
 
   > Why? Although the one-liner is concise, having one import definition and one clear export definition makes things consistent.
 
@@ -1031,7 +1019,7 @@ ESLint rules (applies this guide as linting rules):
   export default es6;
   ```
 
-  - [10.4](#10.4) <a name='10.4'></a>Place all imports at the top of the file and all exports at the end of the file
+  - [10.3](#10.3) <a name='10.3'></a>Place all imports at the top of the file and all exports at the end of the file
 
   > Why? Makes it easy to keep track of all imports and exports.
 
