@@ -799,61 +799,13 @@ ESLint rules (applies this guide as linting rules):
   eslint rules: [`max-nested-callbacks`](http://eslint.org/docs/rules/max-nested-callbacks.html)
 
   ```javascript
-  class Team {
-    // bad
-    transformDevelopers(developers) {
-      return developers.map((developer) => {
-        const {
-          firstName,
-          lastName
-        } = developer;
-        const fullName = firstName + lastName;
-
-        return {
-         ...developer,
-         fullName
-        };
-      });
-    }
-
-    // good
-    transformDeveloper(developer) {
-      const {
-        firstName,
-        lastName
-      } = developer;
-      const fullName = firstName + lastName;
-
-      return {
-       ...developer,
-       fullName
-      };
-    }
-
-    transformDevelopers(developers) {
-      return developers.map(this.transformDeveloper);
-    }
-  }
-
-  // best
-  const transformDeveloper = (developer) => {
-    const {
-      firstName,
-      lastName
-    } = developer;
-    const fullName = firstName + lastName;
-
-    return {
-     ...developer,
-     fullName
-    };
-  };
-
-  class Team {
-    transformDevelopers(developers) {
-     return developers.map(transformDeveloper);
-    }
-  }
+  // bad
+  <SomeComponent onClick={(event) => someAction(event.currentTarget.value)}/>
+  
+  // good
+  onClickSomeComponent = (event) => someAction(event.currentTarget.value);
+  
+  <SomeComponent onClick={this.onClickSomeComponent}/>
   ```
 
 **[⬆ back to top](#table-of-contents)**
