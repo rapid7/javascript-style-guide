@@ -883,20 +883,20 @@ ESLint rules (applies this guide as linting rules):
   ```
 
 
-  - [8.2](#8.2) <a name='8.2'></a> Always wrap expression body in curly brackets.
+  - [8.2](#8.2) <a name='8.2'></a> Wrap expression body in curly brackets when multiline, else use the simple return.
 
-  > Why? Provides a consistent return interface, and serves as self-documentation for what is a block.
+  > Why? Provides a concise, readable output.
 
   eslint rules: [`arrow-body-style`](http://eslint.org/docs/rules/arrow-body-style.html).
 
   ```javascript
   // bad
-  [1, 2, 3].map((x) => x * x);
+  [1, 2, 3].map((x) => {
+   return x * x
+  });
 
   // good
-  [1, 2, 3].reduce((y, x) => {
-    return x + y;
-  });
+  [1, 2, 3].map((x) => x * x);
   ```
 
 **[⬆ back to top](#table-of-contents)**
