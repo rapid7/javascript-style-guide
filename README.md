@@ -157,7 +157,7 @@ ESLint rules (applies this guide as linting rules):
 
   - [2.4](#2.4) <a name='2.4'></a> Split out all `let` and `const` statements onto separate lines
 
-  eslint rules: [`no-var`](http://eslint.org/docs/rules/one-var.html). _(only applied with rapid/strict)_
+  eslint rules: [`one-var`](http://eslint.org/docs/rules/one-var.html). _(only applied with rapid/strict)_
 
   ```javascript
   // bad
