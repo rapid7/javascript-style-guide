@@ -513,6 +513,8 @@ ESLint rules (applies this guide as linting rules):
 
   > Why? This helps with readability and creates an extensible style for any size destructuring
 
+  eslint rules: [`object-curly-newline`](http://eslint.org/docs/rules/object-curly-newline.html).
+
   ```javascript
   // bad
   const {one, two, ...rest} = obj;
