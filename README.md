@@ -1076,6 +1076,8 @@ ESLint rules (applies this guide as linting rules):
   - [10.4](#10.4) <a name='10.4'></a>Place all imports at the top of the file and all exports at the end of the file
 
   > Why? Makes it easy to keep track of all imports and exports.
+  
+  > NOTE: This does not apply to named exports declared inline upon instantiation.
 
 **[⬆ back to top](#table-of-contents)**
 
