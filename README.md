@@ -628,6 +628,8 @@ ESLint rules (applies this guide as linting rules):
   ```
 
   - [7.2](#7.2) <a name='7.2'></a> Immediately-Invoked Function Expressions (IIFE):
+  
+  > NOTE: This paradigm is rarely (if ever) needed with proper use of a build system, so it should be avoided wherever possible. If you do find yourself using this to solve a problem, you should take a step back and re-examine the problem as it can likely solve in in a different way.
 
   ```javascript
   (() => {
