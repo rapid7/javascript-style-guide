@@ -155,27 +155,26 @@ ESLint rules (applies this guide as linting rules):
   console.log(b); // ReferenceError
   ```
 
-  - [2.4](#2.4) <a name='2.4'></a> Combine let statements when possible, and especially only when initializing.
-  > NOTE: Because `const` can only be set once, you can have multiple const statements in a block (ideally const statements are prior to let statements)
+  - [2.4](#2.4) <a name='2.4'></a> Split out all `let` and `const` statements onto separate lines
 
   ```javascript
   // bad
+  {
+    let a = 'hi', c, d;
+    const b = 43;
+    
+    if (b > 1) {
+      a = 'no';
+    }
+    c = a + b;
+  }
+
+  // good
   {
     let a = 'hi';
     let c;
     let d;
     const b = 43;
-    if (b > 1) {
-      a = 'no';
-    }
-    c = a + b;
-  }
-
-  // good
-  {
-    let a = 'hi',
-        c, d;
-    const b = 43;
 
     if (b > 1) {
       a = 'no';
@@ -183,25 +182,6 @@ ESLint rules (applies this guide as linting rules):
 
     c = a + b;
   }
-  ```
-
-
-  - [2.5](#2.5) <a name='2.5'></a> When chaining a let statement, each assignment should be on its own line and assignments should be before any unassigned variables.  Unassigned variables should be on the same line.
-
-  > Why? Readability.  This ensures that assignments aren't confused for comma expressions
-
-  ```javascript
-  // bad
-  let b, c, d,// Unassigned variable before assigned variable
-      a = 'hi';
-
-  // bad
-  let a = 'hi', b = 'test', c, d, e; // Multiple assignments on the same line
-
-  // good
-  let a = 'hi',
-      b = 'test',
-      c, d, e;
   ```
 
 
