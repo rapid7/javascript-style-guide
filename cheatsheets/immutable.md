@@ -26,19 +26,18 @@
   - [1.2](#1.2) <a name='1.2'></a> **Copying Arrays**: Use the spread operator ... to copy arrays.
 
   ```javascript
-  "presets": [
-      "stage-2"
-    ]
-    ```
+  // bad
+  const length = items.length;
+  const itemsCopy = [];
 
-    - [1.3](#1.3) <a name='1.3'></a> **babel-preset-react**
+  let index = -1;
 
-    > Why? Needed for any form of `react` development.
+  while (++index < length) {
+    itemsCopy[index] = items[index];
+  }
 
-    ```javascript
-    "presets": [
-      "react"
-    ]
+  // good
+  const itemsCopy = [...items];  
   ```
 
   - [1.3](#1.3) <a name='1.3'></a> **Convert Array like Objects**: To convert an array-like object to an array, use the spread operator.
