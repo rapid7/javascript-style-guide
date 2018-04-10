@@ -935,6 +935,14 @@ ESLint rules (applies this guide as linting rules):
   import { es6 } from './Rapid7StyleGuide';
   export default es6;
   ```
+  
+  **Note:** only use `import/export` when developing for the browser as Node does not support this syntax. When developing in Node use `require/modules.export`.
+  
+  ```javascript
+  // bad
+  const Rapid7StyleGuide = require('./Rapid7StyleGuide');
+  module.exports = Rapid7StyleGuide.node;
+  ```
 
   - [10.2](#10.2) <a name='10.2'></a>And do not export directly from an import.
 
