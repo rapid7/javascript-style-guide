@@ -53,15 +53,7 @@ ESLint rules (applies this guide as linting rules):
   1. [Accessors](#accessors)
   1. [Events](#events)
   1. [jQuery](#jquery)
-  1. [ECMAScript 5 Compatibility](#ecmascript-5-compatibility)
-  1. [ECMAScript 6 Styles](#ecmascript-6-styles)
   1. [Testing](#testing)
-  1. [Performance](#performance)
-  1. [Resources](#resources)
-  1. [In the Wild](#in-the-wild)
-  1. [Translation](#translation)
-  1. [The JavaScript Style Guide Guide](#the-javascript-style-guide-guide)
-  1. [Chat With Us About JavaScript](#chat-with-us-about-javascript)
   1. [Contributors](#contributors)
   1. [License](#license)
 
@@ -2312,35 +2304,9 @@ ESLint rules (applies this guide as linting rules):
 
 **[⬆ back to top](#table-of-contents)**
 
-## ECMAScript 5 Compatibility
-
-  - [26.1](#26.1) <a name='26.1'></a> Refer to [Kangax](https://twitter.com/kangax/)'s ES5 [compatibility table](http://kangax.github.io/es5-compat-table/).
-
-**[⬆ back to top](#table-of-contents)**
-
-## ES2015+ Styles
-
-  - [27.1](#27.1) <a name='27.1'></a> This is a collection of links to the various es6 features.
-
-1. [Arrow Functions](#arrow-functions)
-1. [Classes](#constructors)
-1. [Object Shorthand](#es6-object-shorthand)
-1. [Object Concise](#es6-object-concise)
-1. [Object Computed Properties](#es6-computed-properties)
-1. [Template Strings](#es6-template-literals)
-1. [Destructuring](#destructuring)
-1. [Default Parameters](#es6-default-parameters)
-1. [Rest](#es6-rest)
-1. [Array Spreads](#es6-array-spreads)
-1. [Let and Const](#references)
-1. [Iterators and Generators](#iterators-and-generators)
-1. [Modules](#modules)
-
-**[⬆ back to top](#table-of-contents)**
-
 ## Testing
 
-  - [28.1](#28.1) <a name="28.1"></a> **Yup.**
+  - [26.1](#26.1) <a name="26.1"></a> **Yup.**
 
   ```javascript
   function () {
@@ -2348,108 +2314,13 @@ ESLint rules (applies this guide as linting rules):
   }
   ```
 
-  - [28.2](#28.2) <a name="28.2"></a> **No, but seriously**:
+  - [26.2](#26.2) <a name="26.2"></a> **No, but seriously**:
    - Whichever testing framework you use, you should be writing tests!
    - Strive to write many small pure functions, and minimize where mutations occur.
    - Be cautious about stubs and mocks - they can make your tests more brittle.
    - 100% test coverage is a good goal to strive for, even if it's not always practical to reach it.
+   - If you touch code that is untested, then write tests for it. If the scope of the code touched is too large to test alone, at minimum test your changes.
    - Whenever you fix a bug, _write a regression test_. A bug fixed without a regression test is almost certainly going to break again in the future.
-
-**[⬆ back to top](#table-of-contents)**
-
-
-## Performance
-
-  - [On Layout & Web Performance](http://www.kellegous.com/j/2013/01/26/layout-performance/)
-  - [String vs Array Concat](http://jsperf.com/string-vs-array-concat/2)
-  - [Try/Catch Cost In a Loop](http://jsperf.com/try-catch-in-loop-cost)
-  - [Bang Function](http://jsperf.com/bang-function)
-  - [jQuery Find vs Context, Selector](http://jsperf.com/jquery-find-vs-context-sel/13)
-  - [innerHTML vs textContent for script text](http://jsperf.com/innerhtml-vs-textcontent-for-script-text)
-  - [Long String Concatenation](http://jsperf.com/ya-string-concat)
-  - Loading...
-
-**[⬆ back to top](#table-of-contents)**
-
-
-## Resources
-
-**Learning ES6**
-
-  - [Draft ECMA 2015 (ES6) Spec](https://people.mozilla.org/~jorendorff/es6-draft.html)
-  - [ExploringJS](http://exploringjs.com/)
-  - [ES6 Compatibility Table](https://kangax.github.io/compat-table/es6/)
-  - [Comprehensive Overview of ES6 Features](http://es6-features.org/)
-
-**Read This**
-
-  - [Standard ECMA-262](http://www.ecma-international.org/ecma-262/6.0/index.html)
-
-**Tools**
-
-  - Code Style Linters
-    + [ESlint](http://eslint.org/) - [Rapid7 Style .eslintrc](https://github.com/rapid7/javascript-style-guide/blob/master/linters/.eslintrc)
-    + [JSHint](http://jshint.com/) - [Rapid7 Style .jshintrc](https://github.com/rapid7/javascript-style-guide/blob/master/linters/jshintrc)
-    + [JSCS](https://github.com/jscs-dev/node-jscs) - [Rapid7 Style Preset](https://github.com/jscs-dev/node-jscs/blob/master/presets/rapid7.json)
-
-**Other Style Guides**
-
-  - [Google JavaScript Style Guide](http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml)
-  - [jQuery Core Style Guidelines](http://contribute.jquery.org/style-guide/js/)
-  - [Principles of Writing Consistent, Idiomatic JavaScript](https://github.com/rwaldron/idiomatic.js)
-
-**Other Styles**
-
-  - [Naming this in nested functions](https://gist.github.com/cjohansen/4135065) - Christian Johansen
-  - [Conditional Callbacks](https://github.com/rapid7/javascript-style-guide/issues/52) - Ross Allen
-  - [Popular JavaScript Coding Conventions on Github](http://sideeffect.kr/popularconvention/#javascript) - JeongHoon Byun
-  - [Multiple var statements in JavaScript, not superfluous](http://benalman.com/news/2012/05/multiple-var-statements-javascript/) - Ben Alman
-
-**Further Reading**
-
-  - [Understanding JavaScript Closures](http://javascriptweblog.wordpress.com/2010/10/25/understanding-javascript-closures/) - Angus Croll
-  - [Basic JavaScript for the impatient programmer](http://www.2ality.com/2013/06/basic-javascript.html) - Dr. Axel Rauschmayer
-  - [You Might Not Need jQuery](http://youmightnotneedjquery.com/) - Zack Bloom & Adam Schwartz
-  - [ES6 Features](https://github.com/lukehoban/es6features) - Luke Hoban
-  - [Frontend Guidelines](https://github.com/bendc/frontend-guidelines) - Benjamin De Cock
-  - [Javascript Garden](http://bonsaiden.github.io/JavaScript-Garden) - Ivo Wetzel
-
-**Books**
-
-  - [JavaScript: The Good Parts](http://www.amazon.com/JavaScript-Good-Parts-Douglas-Crockford/dp/0596517742) - Douglas Crockford
-  - [JavaScript Patterns](http://www.amazon.com/JavaScript-Patterns-Stoyan-Stefanov/dp/0596806752) - Stoyan Stefanov
-  - [Pro JavaScript Design Patterns](http://www.amazon.com/JavaScript-Design-Patterns-Recipes-Problem-Solution/dp/159059908X)  - Ross Harmes and Dustin Diaz
-  - [High Performance Web Sites: Essential Knowledge for Front-End Engineers](http://www.amazon.com/High-Performance-Web-Sites-Essential/dp/0596529309) - Steve Souders
-  - [Maintainable JavaScript](http://www.amazon.com/Maintainable-JavaScript-Nicholas-C-Zakas/dp/1449327680) - Nicholas C. Zakas
-  - [JavaScript Web Applications](http://www.amazon.com/JavaScript-Web-Applications-Alex-MacCaw/dp/144930351X) - Alex MacCaw
-  - [Pro JavaScript Techniques](http://www.amazon.com/Pro-JavaScript-Techniques-John-Resig/dp/1590597273) - John Resig
-  - [Smashing Node.js: JavaScript Everywhere](http://www.amazon.com/Smashing-Node-js-JavaScript-Everywhere-Magazine/dp/1119962595) - Guillermo Rauch
-  - [Secrets of the JavaScript Ninja](http://www.amazon.com/Secrets-JavaScript-Ninja-John-Resig/dp/193398869X) - John Resig and Bear Bibeault
-  - [Human JavaScript](http://humanjavascript.com/) - Henrik Joreteg
-  - [Superhero.js](http://superherojs.com/) - Kim Joar Bekkelund, Mads Mobæk, & Olav Bjorkoy
-  - [JSBooks](http://jsbooks.revolunet.com/) - Julien Bouquillon
-  - [Third Party JavaScript](https://www.manning.com/books/third-party-javascript) - Ben Vinegar and Anton Kovalyov
-  - [Effective JavaScript: 68 Specific Ways to Harness the Power of JavaScript](http://amzn.com/0321812182) - David Herman
-  - [Eloquent JavaScript](http://eloquentjavascript.net/) - Marijn Haverbeke
-  - [You Don't Know JS: ES6 & Beyond](http://shop.oreilly.com/product/0636920033769.do) - Kyle Simpson
-
-**Blogs**
-
-  - [DailyJS](http://dailyjs.com/)
-  - [JavaScript Weekly](http://javascriptweekly.com/)
-  - [JavaScript, JavaScript...](http://javascriptweblog.wordpress.com/)
-  - [Bocoup Weblog](https://bocoup.com/weblog)
-  - [Adequately Good](http://www.adequatelygood.com/)
-  - [NCZOnline](https://www.nczonline.net/)
-  - [Perfection Kills](http://perfectionkills.com/)
-  - [Ben Alman](http://benalman.com/)
-  - [Dmitry Baranovskiy](http://dmitry.baranovskiy.com/)
-  - [Dustin Diaz](http://dustindiaz.com/)
-  - [nettuts](http://code.tutsplus.com/?s=javascript)
-
-**Podcasts**
-
-  - [JavaScript Jabber](https://devchat.tv/js-jabber/)
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -2484,9 +2355,5 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 **[⬆ back to top](#table-of-contents)**
-
-## Amendments
-
-We encourage you to fork this guide and change the rules to fit your team's style guide. Below, you may list some amendments to the style guide. This allows you to periodically update your style guide without having to deal with merge conflicts.
 
 # };
