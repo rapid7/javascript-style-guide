@@ -2135,19 +2135,8 @@ ESLint rules (applies this guide as linting rules):
   export default makeStyleGuide;
   ```
 
-  - [22.8](#22.8) <a name='22.8'></a> Use PascalCase when you export a singleton / function library / bare object.
 
-  ```javascript
-  const Rapid7StyleGuide = {
-    es6: {
-    }
-  };
-
-  export default Rapid7StyleGuide;
-  ```
-
-
-  - [22.9](#22.9) <a name='22.9'></a> Method names should be verbs
+  - [22.8](#22.8) <a name='22.8'></a> Method names should be verbs
 
   ```javascript
   // bad
