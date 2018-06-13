@@ -1937,7 +1937,7 @@ ESLint rules (applies this guide as linting rules):
 
 ## Type Casting & Coercion
 
-  - [21.1](#21.1) <a name='21.1'></a> Strings:
+  - [21.1](#21.1) <a name='21.1'></a> Use template literals for string coercion:
 
   ```javascript
   //  => this.reviewScore = 9;
