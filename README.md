@@ -2203,6 +2203,8 @@ ESLint rules (applies this guide as linting rules):
 
 
 ## jQuery
+  
+  > NOTE: The use of jQuery is generally discouraged, as modern JS standards has basically negated the normalization that jQuery provides. If you must use jQuery, these are general guidelines for working with them, however you should attempt to solve the problem using standard JS if possible.
 
   - [25.1](#25.1) <a name='25.1'></a> Prefix jQuery object variables with a `$`.
 
