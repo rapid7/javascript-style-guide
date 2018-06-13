@@ -2002,7 +2002,7 @@ ESLint rules (applies this guide as linting rules):
   function thisIsMyFunction() {}
   ```
 
-  - [22.3](#22.3) <a name='22.3'></a> Use PascalCase when naming constructors, classes, or React components.
+  - [22.3](#22.3) <a name='22.3'></a> Use PascalCase exclusively when naming constructors, classes, or React components.
 
   ```javascript
   // bad
@@ -2024,6 +2024,12 @@ ESLint rules (applies this guide as linting rules):
   const good = new User({
     name: 'yup',
   });
+  
+  // bad
+  const myComponent = () = <div />;
+  
+  // good
+  const MyComponent = () => <div />;
   ```
 
   - [22.4](#22.4) <a name='22.4'></a> Use a leading underscore `_` when naming private properties.
