@@ -1871,25 +1871,14 @@ ESLint rules (applies this guide as linting rules):
   };
   ```
 
-  - [19.2](#19.2) <a name='19.2'></a> Additional trailing comma: **Nope.**
+  - [19.2](#19.2) <a name='19.2'></a> Additional trailing comma: **Yup.**
 
   eslint rules: [`no-comma-dangle`](http://eslint.org/docs/rules/no-comma-dangle.html).
 
-  > Why? Even though a trailing comma can lead to cleaner git diffs, it will be difficult to prevent ide formatters from detecting this as an error. To new developers this may be mistaken as an error as well. This is potentially confusing in sparse arrays, as `[,,,]` will create 3 `undefined` items
+  > Why? A trailing comma can lead to cleaner git diffs, and makes movement of newlined properties easier.
 
   ```javascript
   // bad
-  const hero = {
-    firstName: 'Dana',
-    lastName: 'Scully',
-  };
-
-  const heroes = [
-    'Batman',
-    'Superman',
-  ];
-
-  // good
   const hero = {
     firstName: 'Dana',
     lastName: 'Scully'
@@ -1898,6 +1887,17 @@ ESLint rules (applies this guide as linting rules):
   const heroes = [
     'Batman',
     'Superman'
+  ];
+
+  // good
+  const hero = {
+    firstName: 'Dana',
+    lastName: 'Scully',
+  };
+
+  const heroes = [
+    'Batman',
+    'Superman',
   ];
   ```
 
