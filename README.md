@@ -1697,46 +1697,6 @@ ESLint rules (applies this guide as linting rules):
   }
 
   return baz;
-
-  // bad
-  const obj = {
-    foo() {
-    },
-    bar() {
-    },
-  };
-  return obj;
-
-  // good
-  const obj = {
-    foo() {
-    },
-
-    bar() {
-    },
-  };
-
-  return obj;
-
-  // bad
-  const arr = [
-    function foo() {
-    },
-    function bar() {
-    },
-  ];
-  return arr;
-
-  // good
-  const arr = [
-    function foo() {
-    },
-
-    function bar() {
-    },
-  ];
-
-  return arr;
   ```
 
   - [18.8](#18.8) <a name='18.8'></a> Do not pad your blocks with blank lines.
