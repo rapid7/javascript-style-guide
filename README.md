@@ -1873,7 +1873,7 @@ ESLint rules (applies this guide as linting rules):
 
   - [19.2](#19.2) <a name='19.2'></a> Additional trailing comma: **Yup.**
 
-  eslint rules: [`no-comma-dangle`](http://eslint.org/docs/rules/no-comma-dangle.html).
+  eslint rules: [`comma-dangle`](https://eslint.org/docs/rules/comma-dangle).
 
   > Why? A trailing comma can lead to cleaner git diffs, and makes movement of newlined properties easier.
 
