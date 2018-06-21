@@ -1093,7 +1093,7 @@ ESLint rules (applies this guide as linting rules):
 
   > Why? Makes it easy to change values when necessary, makes values available in testing and other classes, and adds clarity to what the values represent
 
-  eslint rules: [`no-magic-numbers`](http://eslint.org/docs/rules/no-magic-numbers.html).
+  eslint rules: [`no-magic-numbers`](http://eslint.org/docs/rules/no-magic-numbers.html). _(only applied on rapid7/strict)_
 
   ```javascript
   // bad
