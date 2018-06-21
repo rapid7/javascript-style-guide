@@ -1139,7 +1139,9 @@ ESLint rules (applies this guide as linting rules):
 
 ## Variables
 
-  - [13.1](#13.1) <a name='13.1'></a> Always use `const` or `let` to declare variables. Not doing so will result in global variables. We want to avoid polluting the global namespace.
+  - [13.1](#13.1) <a name='13.1'></a> Always use `const` or `let` to declare variables, never `var`. All the same goals `var` has can be accomplished with `let`, without providing the same implicit hoisting / access issues that `var` can provide.
+
+  eslint rules: [`no-var`](http://eslint.org/docs/rules/no-var.html).
 
   ```javascript
   // bad
@@ -1149,7 +1151,7 @@ ESLint rules (applies this guide as linting rules):
   const superPower = new SuperPower();
   ```
 
-  - [13.2](#13.2) <a name='13.2'></a> Use one `const` declaration per variable.
+  - [13.2](#13.2) <a name='13.2'></a> Use one `const` / `let` declaration per variable.
 
   > Why? It's easier to add new variable declarations this way.
 
@@ -1160,38 +1162,22 @@ ESLint rules (applies this guide as linting rules):
   const items = getItems(),
       goSportsTeam = true,
       dragonball = 'z';
+  
+  let foo = 'foo',
+      bar = 'bar';
 
   // good
   const items = getItems();
   const goSportsTeam = true;
   const dragonball = 'z';
+  
+  let foo = 'foo';
+  let bar = 'bar';
   ```
+  
+  > NOTE: The only separation enforced by default is for `const` declarations. The enforcement is also applied for `let` in _rapid7/strict_.
 
-  - [13.3](#13.3) <a name='13.3'></a> Group all your `const`s and then afterward group all your `let`s.
-
-  > Why? This is helpful when later on you might need to assign a variable depending on one of the previous assigned variables.
-
-  ```javascript
-  // bad
-  let i, len, dragonball,
-      items = getItems(),
-      goSportsTeam = true;
-
-  // bad
-  let i;
-  const items = getItems();
-  let dragonball;
-  const goSportsTeam = true;
-  let len;
-
-  // good
-  const goSportsTeam = true;
-  const items = getItems();
-
-  let dragonball, i, length;
-  ```
-
-  - [13.4](#13.4) <a name='13.4'></a> Assign variables where you need them, but place them in a reasonable place.
+  - [13.3](#13.3) <a name='13.3'></a> Assign variables where you need them, but place them in a reasonable place.
 
   > Why? `let` and `const` are block scoped and not function scoped, so memory will only be allocated when that code stage is reached.
 
@@ -1229,6 +1215,25 @@ ESLint rules (applies this guide as linting rules):
      name
     };
   };
+  ```
+  
+  > NOTE: You should group all your `const`s and then afterward group all your `let`s if declared in vicinity of one another. This is helpful when later on you might need to assign a variable depending on one of the previous assigned variables.
+
+  ```javascript
+  // bad
+  let index;
+  const items = getItems();
+  let dragonball;
+  const goSportsTeam = true;
+  let len;
+
+  // good
+  const goSportsTeam = true;
+  const items = getItems();
+
+  let dragonball;
+  let index;
+  let len;
   ```
 
 **[⬆ back to top](#table-of-contents)**
