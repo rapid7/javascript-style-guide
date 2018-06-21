@@ -1028,6 +1028,24 @@ ESLint rules (applies this guide as linting rules):
    }
   };
   ```
+  
+  > NOTE: If you need to parallelize asynchronous operations in an `async` function, you should make use of [`Promise.all()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all).
+  
+  ```javascript
+  const getLotsOfStuff = async (handleSuccess, handleError) => {
+   try {
+    const response = await Promise.all([
+      axios.get('/foo'),
+      axios.get('/bar'),
+      axios.get('/baz'),
+    ]);
+
+    return handleSuccess(response);
+   } catch (error) {
+    return handleError(error);
+   }
+  };
+  ```
 
   - [11.3](#11.3) <a name='11.3'></a> Prefer the use of `async` / `await` over the use of generators.
 
