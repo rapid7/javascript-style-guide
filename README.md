@@ -1217,7 +1217,7 @@ ESLint rules (applies this guide as linting rules):
 
   ```javascript
   // bad
-  let i;
+  let index;
   const items = getItems();
   let dragonball;
   const goSportsTeam = true;
@@ -1228,7 +1228,7 @@ ESLint rules (applies this guide as linting rules):
   const items = getItems();
 
   let dragonball;
-  let i;
+  let index;
   let len;
   ```
 
