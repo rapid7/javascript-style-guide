@@ -35,7 +35,6 @@ ESLint rules (applies this guide as linting rules):
   1. [Destructuring](#destructuring)
   1. [Strings](#strings)
   1. [Functions](#functions)
-  1. [Arrow Functions](#arrow-functions)
   1. [Constructors](#constructors)
   1. [Modules](#modules)
   1. [Iterators and Generators](#iterators-and-generators)
@@ -554,198 +553,7 @@ ESLint rules (applies this guide as linting rules):
   };
   ```
 
-  - [7.2](#7.2) <a name='7.2'></a> Immediately-Invoked Function Expressions (IIFE):
-  
-  > NOTE: This paradigm is rarely (if ever) needed with proper use of a build system, so it should be avoided wherever possible. If you do find yourself using this to solve a problem, you should take a step back and re-examine the problem as it can likely solve in in a different way.
-
-  ```javascript
-  (() => {
-    console.log('Welcome to the Internet. Please follow me.');
-  }());
-  ```
-
-  - [7.3](#7.3) <a name='7.3'></a> Never declare a function in a non-function block (if, while, etc). Assign the function to a variable instead. Browsers will allow you to do it, but they all interpret it differently.
-  - [7.4](#7.4) <a name='7.4'></a> **Note:** ECMA-262 defines a `block` as a list of statements. A function declaration is not a statement. [Read ECMA-262's note on this issue](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf#page=97).
-
-  ```javascript
-  // bad
-  if (currentUser) {
-    function test() {
-      console.log('Nope.');
-    }
-  }
-
-  // good
-  let test;
-
-  if (currentUser) {
-    test = () => {
-      console.log('Yup.');
-    };
-  }
-  ```
-
-  - [7.5](#7.5) <a name='7.5'></a> Never name a parameter `arguments`. This will take precedence over the `arguments` object that is given to every function scope.
-
-  ```javascript
-  // bad
-  function nope(name, options, arguments) {
-    // ...stuff...
-  }
-
-  // good
-  function yup(name, options, args) {
-    // ...stuff...
-  }
-  ```
-
-  <a name="es6-rest"></a>
-  - [7.6](#7.6) <a name='7.6'></a> Never use `arguments`, opt to use rest syntax `...` instead.
-
-  > Why? `...` is explicit about which arguments you want pulled. Plus rest arguments are a real Array and not Array-like like `arguments`.
-
-  ```javascript
-  // bad
-  function concatenateAll() {
-    const args = Array.prototype.slice.call(arguments);
-    return args.join('');
-  }
-
-  // good
-  function concatenateAll(...args) {
-    return args.join('');
-  }
-  ```
-
-  <a name="es6-default-parameters"></a>
-  - [7.7](#7.7) <a name='7.7'></a> Use default parameter syntax rather than mutating function arguments.
-
-  ```javascript
-  // really bad
-  function handleThings(opts) {
-    // No! We shouldn't mutate function arguments.
-    // Double bad: if opts is falsy it'll be set to an object which may
-    // be what you want but it can introduce subtle bugs.
-    opts = opts || {};
-    // ...
-  }
-
-  // still bad
-  function handleThings(opts) {
-    if (opts === void 0) {
-      opts = {};
-    }
-    // ...
-  }
-
-  // good
-  function handleThings(opts = {}) {
-    // ...
-  }
-  ```
-
-  - [7.8](#7.8) <a name='7.8'></a> Avoid side effects with default parameters.
-
-  > Why? They are confusing to reason about.
-
-  ```javascript
-  // bad
-  let b = 1;
-
-  function count(a = b++) {
-    console.log(a);
-  }
-  count();  // 1
-  count();  // 2
-  count(3); // 3
-  count();  // 3
-  ```
-
-  - [7.9](#7.9) <a name='7.9'></a> Always put default parameters last.
-
-  ```javascript
-  // bad
-  const handleThings = (opts = {}, name) => {
-    // ...
-  }
-
-  // good
-  const handleThings = (name, opts = {}) => {
-    // ...
-  }
-  ```
-
-- [7.10](#7.10) <a name='7.10'></a> Never use the Function constructor to create a new function.
-
-  > Why? Creating a function in this way evaluates a string similarly to eval(), which opens vulnerabilities.
-
-  ```javascript
-  // bad
-  var add = new Function('a', 'b', 'return a + b');
-
-  // still bad
-  var subtract = Function('a', 'b', 'return a - b');
-
-  // good
-  let subtract = (a, b) => {
-    return a - b;
-  }
-  ```
-
-- [7.11](#7.11) <a name="7.11"></a> Spacing in a function signature.
-
-  > Why? Consistency is good, and you shouldn’t have to add or remove a space when adding or removing a name.
-
-  ```javascript
-  // bad
-  const f = function(){};
-  const g = function (){};
-  const h = function() {};
-
-  // good
-  const x = function () {};
-  const y = function a() {};
-  ```
-
-- [7.12](#7.12) <a name="7.12"></a> Avoid long functions.  If your function is over 50 lines, or performs multiple operations, it should likely be refactored.
-
-  > Why? Long functions are difficult to test, more likely to break, are not single purpose
-
-   eslint rules: [`max-statements`](http://eslint.org/docs/rules/max-statements.html).
-   
-  > NOTE: The maximum statements will be limited to _25 lines_ when using _rapid7/strict_
-
-- [7.13](#7.13) <a name="7.13"></a> Avoid deeply nested code
-
-  > Why? Deeply nested code makes testing difficult and is usually a sign that that your function is doing too much
-
-   eslint rules: [`max-depth`](http://eslint.org/docs/rules/max-depth.html).
-   
-  > NOTE: The maximum depth will be limited to _1_ when using _rapid7/strict_
-
-- [7.14](#7.14) <a name='7.14'></a> Instance methods or pure functions are preferred to anonymous functions
-
-  > Why? Anonymous functions are difficult to test, and they make code difficult to read.  Future-proofs code in some cases be separating functionality.  Helps limit code depth
-
-  > Why not? Very short callbacks that are unlikely to need to be tested, reused, or changed
-
-  eslint rules: [`max-nested-callbacks`](http://eslint.org/docs/rules/max-nested-callbacks.html)
-
-  ```javascript
-  // bad
-  <SomeComponent onClick={(event) => someAction(event.currentTarget.value)}/>
-  
-  // good
-  onClickSomeComponent = (event) => someAction(event.currentTarget.value);
-  
-  <SomeComponent onClick={this.onClickSomeComponent}/>
-  ```
-
-**[⬆ back to top](#table-of-contents)**
-
-## Arrow Functions
-
-  - [8.1](#8.1) <a name='8.1'></a> When you use function expressions, use arrow function notation if at all possible.
+  - [7.2](#7.2) <a name='7.2'></a> When you use function expressions, use arrow function notation if at all possible.
 
   > Why? It creates a version of the function that executes in the context of `this`, or with no context if standalone. This is usually what you want, and it is a more concise syntax.
 
@@ -767,21 +575,225 @@ ESLint rules (applies this guide as linting rules):
   });
   ```
 
+  - [7.3](#7.3) <a name='7.3'></a> Immediately-Invoked Function Expressions (IIFE):
+  
+  > NOTE: This paradigm is rarely (if ever) needed with proper use of a build system, so it should be avoided wherever possible. If you do find yourself using this to solve a problem, you should take a step back and re-examine the problem as it can likely solve in in a different way.
 
-  - [8.2](#8.2) <a name='8.2'></a> Wrap expression body in curly brackets when multiline, else use the simple return.
+  ```javascript
+  (() => {
+    console.log('Welcome to the Internet. Please follow me.');
+  }());
+  ```
 
-  > Why? Provides a concise, readable output.
-
-  eslint rules: [`arrow-body-style`](http://eslint.org/docs/rules/arrow-body-style.html).
+  - [7.4](#7.4) <a name='7.4'></a> Never declare a function in a non-function block (if, while, etc). Assign the function to a variable instead. Browsers will allow you to do it, but they all interpret it differently.
+  
+  ```javascript
+  // bad
+  const doThing = (stuff) => {
+    // computations
+  
+    const doOtherThing = (stuff, otherStuff) => {
+      // other computations
+      
+      return result;
+    };
+    
+    return doOtherThing(stuff, 'some value');
+  };
+  
+  // good
+  const doOtherThing = (otherStuff) => {
+    // other computations
+    
+    return result;
+  };
+  
+  const doThing = (stuff) => {
+    // computations
+    
+    return doOtherThing(stuff, 'some value');
+  };
+  ```
+  
+  - [7.5](#7.5) <a name='7.5'></a> **Note:** ECMA-262 defines a `block` as a list of statements. A function declaration is not a statement. [Read ECMA-262's note on this issue](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf#page=97).
 
   ```javascript
   // bad
-  [1, 2, 3].map((x) => {
-   return x * x
-  });
+  if (currentUser) {
+    function test() {
+      console.log('Nope.');
+    }
+  }
+
+  // ok
+  let test = () => {};
+
+  if (currentUser) {
+    test = () => console.log('Yup.');
+  }
+  
+  // good
+  const test = currentUser
+    ? () => console.log('Yup.')
+    : () => {};
+  ```
+
+  - [7.6](#7.6) <a name='7.6'></a> Never name a parameter `arguments`. This will take precedence over the `arguments` object that is given to every function scope.
+
+  ```javascript
+  // bad
+  function nope(name, options, arguments) {
+    // ...stuff...
+  }
 
   // good
-  [1, 2, 3].map((x) => x * x);
+  function yup(name, options, args) {
+    // ...stuff...
+  }
+  ```
+
+  <a name="es6-rest"></a>
+  - [7.7](#7.7) <a name='7.7'></a> Never use `arguments` directly, opt to use rest syntax `...` instead.
+
+  eslint rules: [`prefer-rest-params`](https://eslint.org/docs/rules/prefer-rest-params).
+
+  > Why? `...` is explicit about which arguments you want pulled. Plus rest arguments are a real Array and not Array-like like `arguments`. Plus, you can only use `arguments` if using a `function`, it is not available in fat-arrow functions.
+
+  ```javascript
+  // bad
+  function concatenateAll() {
+    return Array.prototype.slice.call(arguments).join('');
+  }
+
+  // good
+  const concatenateAll = (...args) => args.join('');
+  ```
+
+  <a name="es6-default-parameters"></a>
+  - [7.8](#7.8) <a name='7.8'></a> Use default parameter syntax rather than mutating function arguments.
+
+  ```javascript
+  // really bad
+  const handleThings = (opts) => {
+    // No! We shouldn't mutate function arguments.
+    // Double bad: if opts is falsy it'll be set to an object which may
+    // be what you want but it can introduce subtle bugs.
+    opts = opts || {};
+    // ...
+  }
+
+  // still bad
+  const handleThings = (opts) => {
+    if (opts === void 0) {
+      opts = {};
+    }
+    // ...
+  }
+
+  // good
+  const handleThings = (opts = {}) => {
+    // ...
+  }
+  ```
+
+  - [7.9](#7.9) <a name='7.9'></a> Avoid side effects with default parameters.
+
+  > Why? They are confusing to reason about.
+
+  ```javascript
+  // bad
+  let b = 1;
+
+  const count = (a = b++) => console.log(a);
+  
+  count();  // 1
+  count();  // 2
+  count(3); // 3
+  count();  // 3
+  ```
+
+  - [7.10](#7.10) <a name='7.10'></a> Always put default parameters last.
+
+  ```javascript
+  // bad
+  const handleThings = (opts = {}, name) => {
+    // ...
+  }
+
+  // good
+  const handleThings = (name, opts = {}) => {
+    // ...
+  }
+  ```
+
+- [7.11](#7.11) <a name='7.11'></a> Never use the Function constructor to create a new function.
+
+  > Why? Creating a function in this way evaluates a string similarly to eval(), which opens vulnerabilities.
+
+  eslint rules: [`no-new-func`](https://eslint.org/docs/rules/no-new-func).
+
+  ```javascript
+  // bad
+  var add = new Function('a', 'b', 'return a + b');
+
+  // still bad
+  var subtract = Function('a', 'b', 'return a - b');
+
+  // good
+  let subtract = (a, b) => {
+    return a - b;
+  }
+  ```
+
+- [7.12](#7.12) <a name="7.12"></a> Spacing in a function signature.
+
+  > Why? Consistency is good, and you shouldn’t have to add or remove a space when adding or removing a name.
+
+  eslint rules: [`space-before-function-paren`](https://eslint.org/docs/rules/space-before-function-paren).
+
+  ```javascript
+  // bad
+  const f = function(){};
+  const g = function (){};
+  const h = function() {};
+
+  // good
+  const x = function () {};
+  const y = function a() {};
+  ```
+
+- [7.13](#7.13) <a name="7.13"></a> Avoid long functions.  If your function is over 50 lines, or performs multiple operations, it should likely be refactored.
+
+  > Why? Long functions are difficult to test, more likely to break, are not single purpose
+
+   eslint rules: [`max-statements`](http://eslint.org/docs/rules/max-statements.html).
+   
+  > NOTE: The maximum statements will be limited to _25 lines_ when using _rapid7/strict_
+
+- [7.14](#7.14) <a name="7.14"></a> Avoid deeply nested code
+
+  > Why? Deeply nested code makes testing difficult and is usually a sign that that your function is doing too much
+
+   eslint rules: [`max-depth`](http://eslint.org/docs/rules/max-depth.html).
+   
+  > NOTE: The maximum depth will be limited to _1_ when using _rapid7/strict_
+
+- [7.15](#7.15) <a name='7.15'></a> Instance methods or pure functions are preferred to anonymous functions
+
+  > Why? Anonymous functions are difficult to test, and they make code difficult to read.  Future-proofs code in some cases be separating functionality.  Helps limit code depth
+
+  > Why not? Very short callbacks that are unlikely to need to be tested, reused, or changed
+
+  eslint rules: [`max-nested-callbacks`](http://eslint.org/docs/rules/max-nested-callbacks.html)
+
+  ```javascript
+  // bad
+  <SomeComponent onClick={(event) => someAction(event.currentTarget.value)}/>
+  
+  // good
+  onClickSomeComponent = (event) => someAction(event.currentTarget.value);
+  
+  <SomeComponent onClick={this.onClickSomeComponent}/>
   ```
 
 **[⬆ back to top](#table-of-contents)**
