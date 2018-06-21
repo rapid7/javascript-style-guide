@@ -1170,6 +1170,8 @@ ESLint rules (applies this guide as linting rules):
   let foo = 'foo';
   let bar = 'bar';
   ```
+  
+  > NOTE: The only separation enforced by default is for `const` declarations. The enforcement is also applied for `let` in _rapid7/strict_.
 
   - [13.3](#13.3) <a name='13.3'></a> Assign variables where you need them, but place them in a reasonable place.
 
