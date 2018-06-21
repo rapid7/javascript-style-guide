@@ -862,6 +862,8 @@ ESLint rules (applies this guide as linting rules):
 
   - [9.3](#9.3) <a name='9.3'></a> Methods can return `this` to help with method chaining.
 
+  > NOTE: If this is the only basis for creating a class, the same approach can be accomplished through the use of [`Object.create()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create), which automatically binds `this` in the prototype functions to the object being created.
+
   ```javascript
   // bad
   Jedi.prototype.jump = function () {
@@ -893,6 +895,31 @@ ESLint rules (applies this guide as linting rules):
 
   const luke = new Jedi();
 
+  luke
+    .jump()
+    .setHeight(20);
+    
+  // better
+  const createJedi = () => {
+    const jedi = Object.create({
+      jump() {
+        this.jumping = true;
+        return this;
+      },
+      setHeight(height) {
+        this.height = height;
+        return this;
+      }
+    });
+    
+    jedi.jumping = false;
+    jedi.height = 0;
+   
+    return jedi;
+  };
+  
+  const luke = createJedi();
+  
   luke
     .jump()
     .setHeight(20);
