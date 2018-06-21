@@ -1353,8 +1353,6 @@ ESLint rules (applies this guide as linting rules):
 
   - [16.1](#16.1) <a name='16.1'></a> Use braces and newlines with all blocks.
 
-  eslint rules: [`arrow-body-style`](http://eslint.org/docs/rules/arrow-body-style.html), [`curly`](http://eslint.org/docs/rules/curly.html).
-
   ```javascript
   // bad
   if (test)
