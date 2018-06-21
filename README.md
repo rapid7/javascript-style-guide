@@ -1068,8 +1068,12 @@ ESLint rules (applies this guide as linting rules):
   };
 
   const isJedi = getProp('jedi', luke);
-
   ```
+  
+  > NOTE: There are also several libraries that provide the above `getProp` functionality as a standard getter. Examples:
+    - [Ramda](https://ramdajs.com/docs/#prop)
+    - [lodash](https://lodash.com/docs/4.17.10#get)
+    - [unchanged](https://github.com/planttheidea/unchanged/blob/master/README.md#get)
 
   - [12.3](#12.3) <a name='12.3'></a> Avoid the use of 'Magic Numbers' and 'Magic Strings' especially when they are reused.  Use static `const` declarations in SCREAMING_SNAKE_CASE instead
 
