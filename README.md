@@ -918,7 +918,7 @@ ESLint rules (applies this guide as linting rules):
 
 ## Modules
 
-  - [10.1](#10.1) <a name='10.1'></a> Always use modules (`import`/`export`) over a non-standard module system. You can always transpile to your preferred module system.
+  - [10.1](#10.1) <a name='10.1'></a> Always use modules (`import`/`export`) over a non-standard module system when working in the browser environment.
 
   > Why? Modules are the current JS standard, and are supported by all modern build systems.
 
@@ -936,10 +936,9 @@ ESLint rules (applies this guide as linting rules):
   export default es6;
   ```
   
-  **Note:** only use `import/export` when developing for the browser as Node does not support this syntax. When developing in Node use `require/modules.export`.
+  **Note:** only use `import/export` when developing for the browser as Node ([less than Node 10](https://nodejs.org/api/esm.html)) does not support this syntax. When developing in Node versions lower than 10 use `require/modules.export`.
   
   ```javascript
-  // bad
   const Rapid7StyleGuide = require('./Rapid7StyleGuide');
   module.exports = Rapid7StyleGuide.node;
   ```
