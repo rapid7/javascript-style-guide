@@ -1383,7 +1383,7 @@ ESLint rules (applies this guide as linting rules):
     // ...stuff...
   }
 
-  // bad - potentially confusing since 0 map be a valid id.
+  // bad - potentially confusing since 0 might be a valid id.
   if (id) {
     // ...stuff...
   }
