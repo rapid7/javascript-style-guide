@@ -1236,52 +1236,32 @@ ESLint rules (applies this guide as linting rules):
 
 ## Hoisting
 
-  - [14.1](#14.1) <a name='14.1'></a> `var` declarations get hoisted to the top of their scope, their assignment does not. `const` and `let` declarations have a new concept called [Temporal Dead Zones (TDZ)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_dead_zone_and_errors_with_let). It's important to know why [typeof is no longer safe](http://es-discourse.com/t/why-typeof-is-no-longer-safe/15).
+  - [14.1](#14.1) <a name='14.1'></a> Function expressions hoist their variable name, but not the function assignment.
 
   ```javascript
-  // we know this wouldn't work (assuming there
-  // is no notDefined global variable)
-  function example() {
-    console.log(notDefined); // => throws a ReferenceError
-  }
+  console.log(fn); // => undefined
 
-  // creating a variable declaration after you
-  // reference the variable will work due to
-  // variable hoisting. Note: the assignment
-  // value of `true` is not hoisted.
-  function example() {
-    console.log(declaredButNotAssigned); // => undefined
-    var declaredButNotAssigned = true;
-  }
+  fn(); // => TypeError fn is not a function
 
-  // The interpreter is hoisting the variable
-  // declaration to the top of the scope,
-  // which means our example could be rewritten as:
-  function example() {
-    let declaredButNotAssigned;
-    console.log(declaredButNotAssigned); // => undefined
-    declaredButNotAssigned = true;
-  }
-
-  // using const and let
-  function example() {
-    console.log(declaredButNotAssigned); // => throws a ReferenceError
-    console.log(typeof declaredButNotAssigned); // => throws a ReferenceError
-    const declaredButNotAssigned = true;
-  }
+  var fn = () => {
+    console.log('function expression');
+  };
   ```
-
-  - [14.2](#14.2) <a name='14.2'></a> Anonymous function expressions hoist their variable name, but not the function assignment.
-
+  
+  > NOTE: If you need to access a function prior to its declaration in the code, then it must be defined as a named `function`, so that it is correctly hoisted.
+  
   ```javascript
-  function example() {
-    console.log(anonymous); // => undefined
-
-    anonymous(); // => TypeError anonymous is not a function
-
-    var anonymous = function () {
-      console.log('anonymous function expression');
-    };
+  // bad
+  const usesFn = (thing) => fn(thing);
+  
+  const fn = (thing) => console.log(thing);
+  
+  // good
+  // eslint-disable-next-line no-use-before-define
+  const usesFn = (thing) => fn(thing);
+  
+  function fn(thing) {
+    console.log(thing);
   }
   ```
 
