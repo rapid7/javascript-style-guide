@@ -1433,6 +1433,8 @@ ESLint rules (applies this guide as linting rules):
 ## Comments
 
   - [17.1](#17.1) <a name='17.1'></a> Use `/** ... */` for jsdoc comments, and `/* ... */` for multi-line comments. Include a description, specify types and values for all parameters and return values.  Follow [jsdoc syntax](http://usejsdoc.org/) in jsdoc comments.
+  
+  > NOTE: The exception to this rule is for ESLint comments, which can be whatever is best suited for the usage.
 
   ```javascript
   // bad
@@ -1461,6 +1463,8 @@ ESLint rules (applies this guide as linting rules):
   ```
 
   - [17.2](#17.2) <a name='17.2'></a> Use `//` for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment unless it's on the first line of a block.
+  
+  > NOTE: The exception to this rule is for ESLint comments, which can be whatever is best suited for the usage.
 
   ```javascript
   // bad
@@ -1500,7 +1504,7 @@ ESLint rules (applies this guide as linting rules):
 
   - [17.3](#17.3) <a name='17.3'></a> Prefixing your future-work comments with `@todo` helps other developers quickly understand if you're pointing out a problem that needs to be revisited, or if you're suggesting a solution to the problem that needs to be implemented. These are different than regular comments because they are actionable
 
-  - [17.4](#17.4) <a name='17.4'></a> Use `// @todo -:` to annotate problems.
+  - [17.4](#17.4) <a name='17.4'></a> Use `// @todo` to annotate problems.
 
   ```javascript
   class Calculator extends Abacus {
@@ -1515,6 +1519,8 @@ ESLint rules (applies this guide as linting rules):
 
 
   - [17.5](#17.5) <a name='17.5'></a> Use jsdoc comments with function name, description, and type + name= for all properties and return values on all methods. Optionally, you can provide a description for each `@param` and `@returns`.
+
+  eslint rules: [`valid-jsdoc`](https://eslint.org/docs/rules/valid-jsdoc).
 
   ```javascript
   class Calculator {
