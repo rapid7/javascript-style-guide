@@ -2049,9 +2049,11 @@ ESLint rules (applies this guide as linting rules):
   const MyComponent = () => <div />;
   ```
 
-  - [22.4](#22.4) <a name='22.4'></a> Use a leading underscore `_` when naming private properties.
+  - [22.4](#22.4) <a name='22.4'></a> If you want to denote a private property for an object / class, you can use a leading underscore `_`.
 
-  eslint rules: [`no-underscore-dangle`](http://eslint.org/docs/rules/no-underscore-dangle.html).
+  eslint rules: [`rapid7/no-trailing-underscores`](https://github.com/rapid7/eslint-plugin-rapid7/tree/master/docs/no-trailing-underscores.md).
+  
+  > NOTE: For now, the concept of private properties is entirely by convention, and has the potential to confuse users and make refators more challenging, so it is generally discouraged.
 
   ```javascript
   // bad
