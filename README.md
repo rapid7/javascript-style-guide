@@ -1808,6 +1808,22 @@ ESLint rules (applies this guide as linting rules):
   > Why? Long lines are difficult to read themselves and in diffs, and they make viewing code side-by-side difficult
 
   eslint rules: [`max-len`](http://eslint.org/docs/rules/max-len.html).
+  
+  - [18.13](#18.13) <a name='18.13'></a> In newlined operations, the operator should be placed at the end of the newline unless an logical operator (`&&`, `||`) or ternary operator (`?`, `:`).
+
+  eslint rules: [`operator-linebreak`](http://eslint.org/docs/rules/operator-linebreak.html).
+  
+  ```javascript
+  // bad
+  const result = ifThing() ?
+    'yes' :
+    'no';
+   
+  // good
+  const result = ifThing()
+    ? 'yes'
+    : 'no';
+  ```
 
 **[⬆ back to top](#table-of-contents)**
 
