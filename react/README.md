@@ -291,7 +291,7 @@
   <Foo className="stuff"/>
   ```
   
-  - [9.2](#9.2) <a name='9.2'></a>: **With children**:If your component has multi-line properties, close its tag on a new line.
+  - [9.2](#9.2) <a name='9.2'></a>: **With children**: If your component has multi-line properties, close its tag on a new line.
 
   ```javascript
   // bad
@@ -387,12 +387,12 @@
   18. componentWillUnmount
   19. Static methods (preferrably alphabetized)
   20. Instance values (preferrably alphabetized)
-  21. Instance methods built with creators* (preferrably alphabetized)
+  21. Instance methods built with creators (preferrably alphabetized)
   21. Standard instance methods (preferrably alphabetized)
   22. Render methods
   23. render
   
-  \* "Instance methods built with creators" refers to methods that are generated with `create*` functions, or with memoize functions.
+    + "Instance methods built with creators" refers to methods that are generated with `create*` functions, or with memoize functions.
   
   ```javascript
   // standard instance method
