@@ -26,7 +26,8 @@
   - [1.2](#1.2) <a name='1.2'></a> **Code conventions**
 
     + Always use JSX syntax.
-    + Prefer the use of functional components when state and lifecycle methods are not needed.
+    + Prefer the use of functional components when state, refs, or lifecycle methods are not needed.
+      + If using react >= 16.3.0, you can also use functional components if refs are the only thing needed ([see the React documentation for details](https://reactjs.org/blog/2018/03/29/react-v-16-3.html#forwardref-api))
     + When state or lifecycle methods are needed, use the `Component` or `PureComponent` class (not `createClass`)
     + Do not use `React.createElement` unless you're initializing the app from a file that is not JSX.
 
@@ -90,7 +91,7 @@
   ReservationCard.displayName = 'ReservationCard';
   ```
   
-  - [3.2](#3.2) <a name='3.2'></a>: **Statics**: When using the `Component` or `PureComponent` class, define `propTypes`, `defaultProps`, and `contextTypes` with `static` keywords instead of direct assignment.
+  - [3.2](#3.2) <a name='3.2'></a>: **Statics**: When using the `Component` or `PureComponent` class, define `displayName`, `propTypes`, `defaultProps`, and `contextTypes` with `static` keywords instead of direct assignment.
 
   ```javascript
   // bad
@@ -203,7 +204,7 @@
   <Foo bar='bar'/>
 
   // good
-  <Foo bar="bar"/>
+  <Foo bar="bar" />
   ```
 
 ## Spacing
@@ -288,7 +289,7 @@
   <Foo className="stuff"></Foo>
 
   // good
-  <Foo className="stuff"/>
+  <Foo className="stuff" />
   ```
   
   - [9.2](#9.2) <a name='9.2'></a>: **With children**: If your component has multi-line properties, close its tag on a new line.
