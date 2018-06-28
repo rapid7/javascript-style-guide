@@ -272,7 +272,7 @@ ESLint rules (applies this guide as linting rules):
 
   > Why? It's easier to find a specific property in a large property list.
 
-  eslint rules: [`rapid7/sort-object-keys`](https://github.com/rapid7/eslint-plugin-rapid7/docs/sort-object-keys.md).
+  eslint rules: [`rapid7/sort-object-keys`](https://github.com/rapid7/eslint-plugin-rapid7/blob/master/docs/sort-object-keys.md).
 
   ```javascript
   const anakinSkywalker = 'Anakin Skywalker';
@@ -2092,7 +2092,7 @@ ESLint rules (applies this guide as linting rules):
 
   - [22.4](#22.4) <a name='22.4'></a> If you want to denote a private property for an object / class, you can use a leading underscore `_`.
 
-  eslint rules: [`rapid7/no-trailing-underscores`](https://github.com/rapid7/eslint-plugin-rapid7/tree/master/docs/no-trailing-underscores.md).
+  eslint rules: [`rapid7/no-trailing-underscore`](https://github.com/rapid7/eslint-plugin-rapid7/blob/master/docs/no-trailing-underscore.md).
   
   > NOTE: For now, the concept of private properties is entirely by convention, and has the potential to confuse users and make refators more challenging, so it is generally discouraged.
 
