@@ -162,6 +162,8 @@
   
   - [4.1](#4.1) <a name='4.1'></a> **Tag alignment**: Closing tag must align with the opening tag.
 
+  eslint rules: [`react/jsx-closing-tag-location`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-tag-location.md).
+
   ```javascript
   // bad
   <Foo someParam="bar"
@@ -175,6 +177,8 @@
   ```
   
   - [4.2](#4.2) <a name='4.2'></a> **Single- vs multi-prop**: When the tag as a single prop passed, it should be on a single line, and when multiple props are passed it should be newline-separated.
+
+  eslint rules: [`react/jsx-max-props-per-line`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-max-props-per-line.md).
 
   ```javascript
   // bad
@@ -197,7 +201,9 @@
   
   - [5.1](#5.1) <a name='5.1'></a>  **Types**: Always use double quotes (`"`) for JSX attributes.
 
-  > Why? JSX attributes [can't contain escaped quotes](http://eslint.org/docs/rules/jsx-quotes), so double quotes make conjunctions like `"don't"` easier to type. Also, it allows for easier distinction between JS logic and static props.
+  > Why? JSX attributes can't contain escaped quotes, so double quotes make conjunctions like `"don't"` easier to type. Also, it allows for easier distinction between JS logic and static props.
+
+  eslint rules: [`jsx-quotes`](https://eslint.org/docs/rules/jsx-quotes).
 
   ```javascript
   // bad
@@ -210,6 +216,8 @@
 ## Spacing
   
   - [6.1](#6.1) <a name='6.1'></a>  **Tags**: Always have a single ending space in your self-closing tag.
+
+  eslint rules: [`react/jsx-tag-spacing`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-tag-spacing.md).
 
   ```javascript
   // bad
@@ -244,7 +252,9 @@
 
 ## Parentheses
   
-  - [8.1](#8.1) <a name='8.1'></a>  **Component returns**: Wrap multiline JSX tags in parentheses when returned:
+  - [8.1](#8.1) <a name='8.1'></a>  **Component returns**: Wrap multiline JSX tags in parentheses when returned.
+
+  eslint rules: [`react/jsx-wrap-multilines`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-wrap-multilines.md).
 
   ```javascript
   /// bad
@@ -283,6 +293,8 @@
 ## Tags
   
   - [9.1](#9.1) <a name='9.1'></a>: **Without children**: Always self-close tags that have no children.
+
+  eslint rules: [`react/self-closing-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/self-closing-comp.md).
 
   ```javascript
   // bad
@@ -365,7 +377,9 @@
 
 ## Ordering
   
-  - [11.1](#11.1) <a name='11.1'></a>: **Component class**: Ordering for class extending either `Component` or `PureComponent`:
+  - [11.1](#11.1) <a name='11.1'></a>: **Component class**: Ordering for class extending either `Component` or `PureComponent`.
+
+  eslint rules: [`react/sort-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/sort-comp.md). _fixable using a [react-codemod transform](https://github.com/reactjs/react-codemod/blob/master/transforms/sort-comp.js)_
 
   1. displayName
   2. propTypes

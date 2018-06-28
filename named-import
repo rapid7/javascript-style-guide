@@ -100,7 +100,7 @@ ESLint rules (applies this guide as linting rules):
 
   > Why const? This ensures that you can't reassign your references, which can lead to bugs and difficult to comprehend code. Also, when used beyond the spec to include variables that will not change, it serves as self-documenting code.
 
-  eslint rules: [`prefer-const`](http://eslint.org/docs/rules/prefer-const.html), [`no-const-assign`](http://eslint.org/docs/rules/no-const-assign.html).
+  eslint rules: [`prefer-const`](https://eslint.org/docs/rules/prefer-const), [`no-const-assign`](https://eslint.org/docs/rules/no-const-assign).
 
   ```javascript
   // bad
@@ -116,7 +116,7 @@ ESLint rules (applies this guide as linting rules):
 
   > Why let? `let` is block-scoped rather than function-scoped like `var`.
 
-  eslint rules: [`no-var`](http://eslint.org/docs/rules/no-var.html).
+  eslint rules: [`no-var`](https://eslint.org/docs/rules/no-var).
 
   ```javascript
   // bad
@@ -148,7 +148,7 @@ ESLint rules (applies this guide as linting rules):
 
   - [2.4](#2.4) <a name='2.4'></a> Split out all `let` and `const` statements onto separate lines
 
-  eslint rules: [`one-var`](http://eslint.org/docs/rules/one-var.html). _(only applied with rapid/strict)_
+  eslint rules: [`one-var`](https://eslint.org/docs/rules/one-var). _(only applied with rapid/strict)_
 
   ```javascript
   // bad
@@ -185,7 +185,7 @@ ESLint rules (applies this guide as linting rules):
 
   - [3.1](#3.1) <a name='3.1'></a> Use the literal syntax for object creation.
 
-  eslint rules: [`no-new-object`](http://eslint.org/docs/rules/no-new-object.html).
+  eslint rules: [`no-new-object`](https://eslint.org/docs/rules/no-new-object).
 
   ```javascript
   // bad
@@ -225,7 +225,7 @@ ESLint rules (applies this guide as linting rules):
   <a name="es6-object-shorthand"></a>
   - [3.3](#3.3) <a name='3.3'></a> Use object method shorthand.
 
-  eslint rules: [`object-shorthand`](http://eslint.org/docs/rules/object-shorthand.html).
+  eslint rules: [`object-shorthand`](https://eslint.org/docs/rules/object-shorthand).
 
   ```javascript
   // bad
@@ -252,7 +252,7 @@ ESLint rules (applies this guide as linting rules):
 
   > Why? It is shorter to write and descriptive.
 
-  eslint rules: [`object-shorthand`](http://eslint.org/docs/rules/object-shorthand.html).
+  eslint rules: [`object-shorthand`](https://eslint.org/docs/rules/object-shorthand).
 
   ```javascript
   const lukeSkywalker = 'Luke Skywalker';
@@ -272,7 +272,7 @@ ESLint rules (applies this guide as linting rules):
 
   > Why? It's easier to find a specific property in a large property list.
 
-  eslint rules: [`sort-keys`](http://eslint.org/docs/rules/sort-keys.html). _(applied via rapid7/strict)_
+  eslint rules: [`rapid7/sort-object-keys`](https://github.com/rapid7/eslint-plugin-rapid7/blob/master/docs/sort-object-keys.md).
 
   ```javascript
   const anakinSkywalker = 'Anakin Skywalker';
@@ -305,7 +305,7 @@ ESLint rules (applies this guide as linting rules):
 
   - [4.1](#4.1) <a name='4.1'></a> Use the literal syntax for array creation.
 
-  eslint rules: [`no-array-constructor`](http://eslint.org/docs/rules/no-array-constructor.html).
+  eslint rules: [`no-array-constructor`](https://eslint.org/docs/rules/no-array-constructor).
 
   ```javascript
   // bad
@@ -316,6 +316,8 @@ ESLint rules (applies this guide as linting rules):
   ```
 
   - [4.2](#4.2) <a name='4.2'></a> Prefer use of spread operator instead of push or direct assignment to add items to an array.
+
+  eslint rules: [`prefer-spread`](https://eslint.org/docs/rules/prefer-spread).
 
   ```javascript
   let someStack = [];
@@ -364,6 +366,8 @@ ESLint rules (applies this guide as linting rules):
 ## Destructuring
 
   - [5.1](#5.1) <a name='5.1'></a> Use object destructuring when accessing and using multiple properties of an object.
+
+  eslint rules: [`prefer-destructuring`](https://eslint.org/docs/rules/prefer-destructuring). _(only applied on rapid7/strict)_
 
   > Why? Destructuring saves you from creating temporary references for those properties., and when the property is used multiple times it minifies better.
 
@@ -479,6 +483,7 @@ ESLint rules (applies this guide as linting rules):
   ```
 
   - [6.2](#6.2) <a name='6.2'></a> Strings longer than 120 characters should be written across multiple lines using string concatenation.
+  
   - [6.3](#6.3) <a name='6.3'></a> Note: If overused, long strings with concatenation could impact performance. [jsPerf](http://jsperf.com/ya-string-concat) & [Discussion](https://github.com/rapid7/javascript-style-guide/issues/40).
 
   ```javascript
@@ -539,6 +544,8 @@ ESLint rules (applies this guide as linting rules):
 
   > Why? Prevents memory from being allocated when not necessary, and forces habit of writing pure functions.
 
+  eslint rules: [`func-style`](https://eslint.org/docs/rules/func-style). _(only applied on rapid7/strict)_
+
   ```javascript
   // bad
   function foo() {
@@ -559,7 +566,7 @@ ESLint rules (applies this guide as linting rules):
 
   > Why not? If you have a fairly complicated function, you might move that logic out into its own function declaration.
 
-  eslint rules: [`prefer-arrow-callback`](http://eslint.org/docs/rules/prefer-arrow-callback.html), [`arrow-spacing`](http://eslint.org/docs/rules/arrow-spacing.html).
+  eslint rules: [`prefer-arrow-callback`](https://eslint.org/docs/rules/prefer-arrow-callback), [`arrow-spacing`](https://eslint.org/docs/rules/arrow-spacing).
 
   ```javascript
   // bad
@@ -672,6 +679,8 @@ ESLint rules (applies this guide as linting rules):
   <a name="es6-default-parameters"></a>
   - [7.8](#7.8) <a name='7.8'></a> Use default parameter syntax rather than mutating function arguments.
 
+  eslint rules: [`no-param-reassign`](https://eslint.org/docs/rules/no-param-reassign). _(only applied on rapid7/strict)_
+
   ```javascript
   // really bad
   const handleThings = (opts) => {
@@ -766,7 +775,7 @@ ESLint rules (applies this guide as linting rules):
 
   > Why? Long functions are difficult to test, more likely to break, are not single purpose
 
-   eslint rules: [`max-statements`](http://eslint.org/docs/rules/max-statements.html).
+   eslint rules: [`max-statements`](https://eslint.org/docs/rules/max-statements).
    
   > NOTE: The maximum statements will be limited to _25 lines_ when using _rapid7/strict_
 
@@ -774,7 +783,7 @@ ESLint rules (applies this guide as linting rules):
 
   > Why? Deeply nested code makes testing difficult and is usually a sign that that your function is doing too much
 
-   eslint rules: [`max-depth`](http://eslint.org/docs/rules/max-depth.html).
+   eslint rules: [`max-depth`](https://eslint.org/docs/rules/max-depth).
    
   > NOTE: The maximum depth will be limited to _1_ when using _rapid7/strict_
 
@@ -784,7 +793,7 @@ ESLint rules (applies this guide as linting rules):
 
   > Why not? Very short callbacks that are unlikely to need to be tested, reused, or changed
 
-  eslint rules: [`max-nested-callbacks`](http://eslint.org/docs/rules/max-nested-callbacks.html)
+  eslint rules: [`max-nested-callbacks`](https://eslint.org/docs/rules/max-nested-callbacks)
 
   ```javascript
   // bad
@@ -953,6 +962,8 @@ ESLint rules (applies this guide as linting rules):
 
   > Why? Modules are the current JS standard, and are supported by all modern build systems.
 
+  eslint rules: [`import/no-commonjs`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-commonjs.md) _(only applied on rapid7/browser)_
+
   ```javascript
   // bad
   const Rapid7StyleGuide = require('./Rapid7StyleGuide');
@@ -967,7 +978,7 @@ ESLint rules (applies this guide as linting rules):
   export default es6;
   ```
   
-  **Note:** only use `import/export` when developing for the browser as Node ([less than Node 10](https://nodejs.org/api/esm.html)) does not support this syntax. When developing in Node versions lower than 10 use `require/modules.export`.
+  **Note:** only use `import/export` when developing for the browser as Node ([less than Node 10](https://nodejs.org/api/esm)) does not support this syntax. When developing in Node versions lower than 10 use `require/modules.export`.
   
   ```javascript
   const Rapid7StyleGuide = require('./Rapid7StyleGuide');
@@ -996,6 +1007,8 @@ ESLint rules (applies this guide as linting rules):
 
   - [10.3](#10.3) <a name='10.3'></a>Place all imports at the top of the file and all exports at the end of the file
 
+  eslint rules: [`import/first`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/first.md)
+
   > Why? Makes it easy to keep track of all imports and exports.
   
   > NOTE: This does not apply to named exports declared inline upon instantiation.
@@ -1008,7 +1021,7 @@ ESLint rules (applies this guide as linting rules):
 
   > Why? This enforces our immutable rule. Dealing with pure functions that return values is easier to reason about than side-effects.
 
-  eslint rules: [`no-iterator`](http://eslint.org/docs/rules/no-iterator.html).
+  eslint rules: [`no-iterator`](https://eslint.org/docs/rules/no-iterator).
 
   ```javascript
   const numbers = [1, 2, 3, 4, 5];
@@ -1092,7 +1105,7 @@ ESLint rules (applies this guide as linting rules):
 
   - [12.1](#12.1) <a name='12.1'></a> Use dot notation when accessing properties.
 
-  eslint rules: [`dot-notation`](http://eslint.org/docs/rules/dot-notation.html).
+  eslint rules: [`dot-notation`](https://eslint.org/docs/rules/dot-notation).
 
   ```javascript
   const luke = {
@@ -1131,7 +1144,7 @@ ESLint rules (applies this guide as linting rules):
 
   > Why? Makes it easy to change values when necessary, makes values available in testing and other classes, and adds clarity to what the values represent
 
-  eslint rules: [`no-magic-numbers`](http://eslint.org/docs/rules/no-magic-numbers.html). _(only applied on rapid7/strict)_
+  eslint rules: [`no-magic-numbers`](https://eslint.org/docs/rules/no-magic-numbers). _(only applied on rapid7/strict)_
 
   ```javascript
   // bad
@@ -1175,7 +1188,7 @@ ESLint rules (applies this guide as linting rules):
 
   - [13.1](#13.1) <a name='13.1'></a> Always use `const` or `let` to declare variables, never `var`. All the same goals `var` has can be accomplished with `let`, without providing the same implicit hoisting / access issues that `var` can provide.
 
-  eslint rules: [`no-var`](http://eslint.org/docs/rules/no-var.html).
+  eslint rules: [`no-var`](https://eslint.org/docs/rules/no-var).
 
   ```javascript
   // bad
@@ -1188,8 +1201,10 @@ ESLint rules (applies this guide as linting rules):
   - [13.2](#13.2) <a name='13.2'></a> Use one `const` / `let` declaration per variable.
 
   > Why? It's easier to add new variable declarations this way.
+  
+  > NOTE: 
 
-  eslint rules: [`one-var`](http://eslint.org/docs/rules/one-var.html).
+  eslint rules: [`one-var`](https://eslint.org/docs/rules/one-var). _(the only separation enforced by default is for `const` declarations. The enforcement is also applied for `let` in rapid7/strict)_
 
   ```javascript
   // bad
@@ -1208,8 +1223,6 @@ ESLint rules (applies this guide as linting rules):
   let foo = 'foo';
   let bar = 'bar';
   ```
-  
-  > NOTE: The only separation enforced by default is for `const` declarations. The enforcement is also applied for `let` in _rapid7/strict_.
 
   - [13.3](#13.3) <a name='13.3'></a> Assign variables where you need them, but place them in a reasonable place.
 
@@ -1306,7 +1319,7 @@ ESLint rules (applies this guide as linting rules):
 
   - [14.3](#14.3) <a name='14.3'></a> Do not use a function prior to its declaration (unless specifically in scenarios described in [14.2](#14.2))
 
-  eslint rules: [`no-use-before-define`](http://eslint.org/docs/rules/no-use-before-define.html).
+  eslint rules: [`no-use-before-define`](https://eslint.org/docs/rules/no-use-before-define).
   
   ```javascript
   // bad
@@ -1328,9 +1341,10 @@ ESLint rules (applies this guide as linting rules):
 ## Comparison Operators & Equality
 
   - [15.1](#15.1) <a name='15.1'></a> Always use `===` and `!==` over `==` and `!=`.
-  - [15.2](#15.2) <a name='15.2'></a> Conditional statements such as the `if` statement evaluate their expression using coercion with the `ToBoolean` abstract method and always follow these simple rules:
 
-  eslint rules: [`eqeqeq`](http://eslint.org/docs/rules/eqeqeq.html).
+  eslint rules: [`eqeqeq`](https://eslint.org/docs/rules/eqeqeq).
+  
+  - [15.2](#15.2) <a name='15.2'></a> Conditional statements such as the `if` statement evaluate their expression using coercion with the `ToBoolean` abstract method and always follow these simple rules:
 
   + `{}` evaluates to `true`
   + `[]` evaluates to `true`
@@ -1387,6 +1401,8 @@ ESLint rules (applies this guide as linting rules):
 
   - [16.1](#16.1) <a name='16.1'></a> Use braces and newlines with all blocks.
 
+  eslint rules: [`curly`](https://eslint.org/docs/rules/curly).
+
   ```javascript
   // bad
   if (test)
@@ -1412,7 +1428,7 @@ ESLint rules (applies this guide as linting rules):
   - [16.2](#16.2) <a name='16.2'></a> If you're using blocks with `if` and `else`, put `else` on the same line as your
     `if` block's closing brace.
 
-  eslint rules: [`brace-style`](http://eslint.org/docs/rules/brace-style.html).
+  eslint rules: [`brace-style`](https://eslint.org/docs/rules/brace-style).
 
   ```javascript
   // bad
@@ -1473,6 +1489,8 @@ ESLint rules (applies this guide as linting rules):
   
   > NOTE: The exception to this rule is for ESLint comments, which can be whatever is best suited for the usage.
 
+  eslint rules: [`line-comment-position`](https://eslint.org/docs/rules/line-comment-position). _(only applied on rapid7/strict)_
+
   ```javascript
   // bad
   const active = true;  // is current tab
@@ -1527,7 +1545,7 @@ ESLint rules (applies this guide as linting rules):
 
   - [17.5](#17.5) <a name='17.5'></a> Use jsdoc comments with function name, description, and type + name= for all properties and return values on all methods. Optionally, you can provide a description for each `@param` and `@returns`.
 
-  eslint rules: [`valid-jsdoc`](https://eslint.org/docs/rules/valid-jsdoc).
+  eslint rules: [`valid-jsdoc`](https://eslint.org/docs/rules/valid-jsdoc). _(only applied on rapid7/strict)_
 
   ```javascript
   class Calculator {
@@ -1554,7 +1572,7 @@ ESLint rules (applies this guide as linting rules):
 
   - [18.1](#18.1) <a name='18.1'></a> Use soft tabs set to 2 spaces.
 
-  eslint rules: [`indent`](http://eslint.org/docs/rules/indent.html).
+  eslint rules: [`indent`](https://eslint.org/docs/rules/indent).
 
   ```javascript
   // bad
@@ -1575,7 +1593,7 @@ ESLint rules (applies this guide as linting rules):
 
   - [18.2](#18.2) <a name='18.2'></a> Place 1 space before the leading brace.
 
-  eslint rules: [`space-before-blocks`](http://eslint.org/docs/rules/space-before-blocks.html).
+  eslint rules: [`space-before-blocks`](https://eslint.org/docs/rules/space-before-blocks).
 
   ```javascript
   // bad
@@ -1603,7 +1621,7 @@ ESLint rules (applies this guide as linting rules):
 
   - [18.3](#18.3) <a name='18.3'></a> Place 1 space before and after the parenthesds in control statements (`if`, `while` etc.). Place no space before the argument list in function calls and declarations.
 
-  eslint rules: [`space-after-keywords`](http://eslint.org/docs/rules/space-after-keywords.html), [`space-before-keywords`](http://eslint.org/docs/rules/space-before-keywords.html).
+  eslint rules: [`space-after-keywords`](https://eslint.org/docs/rules/space-after-keywords), [`space-before-keywords`](https://eslint.org/docs/rules/space-before-keywords).
 
   ```javascript
   // bad
@@ -1629,7 +1647,7 @@ ESLint rules (applies this guide as linting rules):
 
   - [18.4](#18.4) <a name='18.4'></a> Place exactly 1 space between operators.
 
-  eslint rules: [`space-infix-ops`](http://eslint.org/docs/rules/space-infix-ops.html).
+  eslint rules: [`space-infix-ops`](https://eslint.org/docs/rules/space-infix-ops).
 
   ```javascript
   // bad
@@ -1707,7 +1725,7 @@ ESLint rules (applies this guide as linting rules):
 
   - [18.7](#18.7) <a name='18.7'></a> Leave a newline after blocks and before the next statement.
 
-  eslint rules: [`newline-before-return`](http://eslint.org/docs/rules/newline-before-return.html)
+  eslint rules: [`newline-before-return`](https://eslint.org/docs/rules/newline-before-return)
 
   ```javascript
   // bad
@@ -1726,7 +1744,7 @@ ESLint rules (applies this guide as linting rules):
 
   - [18.8](#18.8) <a name='18.8'></a> Do not pad your blocks with blank lines.
 
-  eslint rules: [`padded-blocks`](http://eslint.org/docs/rules/padded-blocks.html).
+  eslint rules: [`padded-blocks`](https://eslint.org/docs/rules/padded-blocks).
 
   ```javascript
   // bad
@@ -1760,7 +1778,7 @@ ESLint rules (applies this guide as linting rules):
 
   - [18.9](#18.9) <a name='18.9'></a> Do not add spaces inside parentheses.
 
-  eslint rules: [`space-in-parens`](http://eslint.org/docs/rules/space-in-parens.html).
+  eslint rules: [`space-in-parens`](https://eslint.org/docs/rules/space-in-parens).
 
   ```javascript
   // bad
@@ -1786,7 +1804,7 @@ ESLint rules (applies this guide as linting rules):
 
   - [18.10](#18.10) <a name='18.10'></a> Do not add spaces inside brackets.
 
-  eslint rules: [`array-bracket-spacing`](http://eslint.org/docs/rules/array-bracket-spacing.html).
+  eslint rules: [`array-bracket-spacing`](https://eslint.org/docs/rules/array-bracket-spacing).
 
   ```javascript
   // bad
@@ -1800,7 +1818,7 @@ ESLint rules (applies this guide as linting rules):
 
   - [18.11](#18.11) <a name='18.11'></a> Do not add spaces inside curly braces.
 
-  eslint rules: [`object-curly-spacing`](http://eslint.org/docs/rules/object-curly-spacing.html).
+  eslint rules: [`object-curly-spacing`](https://eslint.org/docs/rules/object-curly-spacing).
 
   ```javascript
   // bad
@@ -1814,11 +1832,11 @@ ESLint rules (applies this guide as linting rules):
 
   > Why? Long lines are difficult to read themselves and in diffs, and they make viewing code side-by-side difficult
 
-  eslint rules: [`max-len`](http://eslint.org/docs/rules/max-len.html).
+  eslint rules: [`max-len`](https://eslint.org/docs/rules/max-len).
   
   - [18.13](#18.13) <a name='18.13'></a> In newlined operations, the operator should be placed at the end of the newline unless an logical operator (`&&`, `||`) or ternary operator (`?`, `:`).
 
-  eslint rules: [`operator-linebreak`](http://eslint.org/docs/rules/operator-linebreak.html).
+  eslint rules: [`operator-linebreak`](https://eslint.org/docs/rules/operator-linebreak).
   
   ```javascript
   // bad
@@ -1838,7 +1856,7 @@ ESLint rules (applies this guide as linting rules):
 
   - [19.1](#19.1) <a name='19.1'></a> Leading commas: **Nope.**
 
-  eslint rules: [`comma-style`](http://eslint.org/docs/rules/comma-style.html).
+  eslint rules: [`comma-style`](https://eslint.org/docs/rules/comma-style).
 
   ```javascript
   // bad
@@ -1909,7 +1927,7 @@ ESLint rules (applies this guide as linting rules):
 
   - [20.1](#20.1) <a name='20.1'></a> **Yup.**
 
-  eslint rules: [`semi`](http://eslint.org/docs/rules/semi.html).
+  eslint rules: [`semi`](https://eslint.org/docs/rules/semi).
 
   ```javascript
   // bad
@@ -2029,7 +2047,7 @@ ESLint rules (applies this guide as linting rules):
 
   - [22.2](#22.2) <a name='22.2'></a> Use camelCase when naming objects, functions, and instances.
 
-  eslint rules: [`camelcase`](http://eslint.org/docs/rules/camelcase.html).
+  eslint rules: [`camelcase`](https://eslint.org/docs/rules/camelcase).
 
   ```javascript
   // bad
@@ -2074,7 +2092,7 @@ ESLint rules (applies this guide as linting rules):
 
   - [22.4](#22.4) <a name='22.4'></a> If you want to denote a private property for an object / class, you can use a leading underscore `_`.
 
-  eslint rules: [`rapid7/no-trailing-underscores`](https://github.com/rapid7/eslint-plugin-rapid7/tree/master/docs/no-trailing-underscores.md).
+  eslint rules: [`rapid7/no-trailing-underscore`](https://github.com/rapid7/eslint-plugin-rapid7/blob/master/docs/no-trailing-underscore.md).
   
   > NOTE: For now, the concept of private properties is entirely by convention, and has the potential to confuse users and make refators more challenging, so it is generally discouraged.
 
