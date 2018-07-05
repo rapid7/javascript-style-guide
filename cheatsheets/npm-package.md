@@ -50,7 +50,7 @@
     index.js
   ```
 
-  - [1.3](#1.3) <a name='1.3'></a> **`dist` folder**: Keep all compiled output files in a top-level `src` folder
+  - [1.3](#1.3) <a name='1.3'></a> **`dist` folder**: Keep all compiled output files in a top-level `dist` folder
 
   > Why? Identifies what the distributed output of the sources files are.
 
